@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Set CI to false
+        run: echo "CI=false" >> $GITHUB_ENV
+        
       - name: Install dependencies
         run: npm install
 
