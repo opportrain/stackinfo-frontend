@@ -3,6 +3,10 @@ import './home_page.css';
 import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
 import colors from "tailwindcss/colors";
+import Card from "../../shared_components/card/card";
+
+import Filters from "../../shared_components/filter/filter";
+import SelectedFilters from "../../shared_components/selected_filters_bar/selected_filters";
 
 function HomePage () {
     return(
@@ -19,7 +23,27 @@ function HomePage () {
                     <img src={Filter} alt="Filter Icon"/>
                 </button>
             </div>
+            <div className="page-body">
+                <SelectedFilters/>
+                <div className="main-container">
+                    <div className="card-container">
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                    </div>
+                    <Filters/>
+                </div>
+            </div>
         </div>
     )
 }
+
 export default HomePage;

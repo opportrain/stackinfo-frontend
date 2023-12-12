@@ -1,0 +1,61 @@
+.simple-slider .slick-slider .slick-prev:before,
+.simple-slider .slick-slider .slick-next:before {
+
+    font-size: 25px !important;
+    line-height: 1 !important;
+    color: #2664ec !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+.slick-arrow {
+    font-size: 0; /* Hide the text */
+    /* Other styles */
+}
+
+.slick-arrow:before {
+    font-size: 24px; /* Set the font size for the arrow icon */
+    /* Other styles */
+}
+
+
+.simple-slider .slick-prev,
+.simple-slider .slick-next {
+    z-index: 1;
+    font-size: 24px;
+    color: #333;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.simple-slider .slick-prev {
+    left: -35px !important;
+}
+
+.simple-slider .slick-next {
+    right: -35px !important;
+}
+
+.simple-slider .slick-prev:hover,
+.simple-slider .slick-next:hover {
+    color: #555;
+}
+
+.simple-slider {
+    margin: 20px;
+    padding: 20px;
+    max-width: 290px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.slider-element {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    background-color: rgba(204, 212, 255, 0.35);
+    height: 32px;
+    border-radius: 8px;
+    padding: 0 1em;
+}

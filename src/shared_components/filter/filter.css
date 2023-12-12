@@ -1,0 +1,10 @@
+.filters-container{
+    /*just to test */
+    background-color:#FFF ;
+    min-width: 335px;
+    height: 600px;
+    border-radius: 12px;
+    margin: 20px 0;
+    align-items: center;
+    text-align: center;
+}

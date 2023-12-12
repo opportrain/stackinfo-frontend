@@ -1,0 +1,58 @@
+hr {
+    border-top: 1px solid #ECEDEC;
+    margin: 0 -2em;
+}
+
+.card {
+    min-width: 10em;
+    min-height: 20em;
+    border-radius: 1em;
+    border: 1px solid #F1F1F1;
+    background: #FFF;
+    padding: 2em;
+    margin: 1.25em 1.25em 1.25em 0 ;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.head,
+.card-body,
+.card-result {
+    flex: 1;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
+
+.card-logo {
+    width: 4.375em;
+    height: 4.375em;
+    border-radius: 0.5em;
+}
+
+.card-description {
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.company-name {
+    color: #2D2D2D;
+    font-family: Poppins, sans-serif;
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 1.25em;
+    text-align: left;
+}
+
+.company-slogan {
+    color: #6D6D6D;
+    font-size: 1em;
+}
