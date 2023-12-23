@@ -2,11 +2,11 @@ import React from 'react';
 import './home_page.css';
 import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
-import colors from "tailwindcss/colors";
 import Card from "../../shared_components/card/card";
 
 import Filters from "../../shared_components/filter/filter";
 import SelectedFilters from "../../shared_components/selected_filters_bar/selected_filters";
+import FeedbackModal from "../../shared_components/feedback-modal/feedback-modal";
 
 function HomePage () {
     return(
@@ -42,6 +42,7 @@ function HomePage () {
                     <Filters/>
                 </div>
             </div>
+            <FeedbackModal/>
         </div>
     )
 }
