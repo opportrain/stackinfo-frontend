@@ -4,9 +4,11 @@ import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
 import colors from "tailwindcss/colors";
 import Card from "../../shared_components/card/card";
-
+// import { Scrollbars } from 'react-custom-scrollbars';
 import Filters from "../../shared_components/filter/filter";
 import SelectedFilters from "../../shared_components/selected_filters_bar/selected_filters";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 function HomePage () {
     return(
@@ -23,25 +25,36 @@ function HomePage () {
                     <img src={Filter} alt="Filter Icon"/>
                 </button>
             </div>
-            <div className="page-body">
+                 <div className="page-body">
                 <SelectedFilters/>
-                <div className="main-container">
-                    <div className="card-container">
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                    </div>
-                    <Filters/>
-                </div>
-            </div>
+                     <SimpleBar  style={{ maxHeight: '100vh', width: '100%'}}>
+                         <div className="main-container">
+                             <div className="card-container">
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                                <Card/>
+                             </div>
+                            <Filters/>
+                        </div>
+                     </SimpleBar>
+                 </div>
+
         </div>
     )
 }
