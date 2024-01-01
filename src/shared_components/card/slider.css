@@ -1,29 +1,23 @@
-.simple-slider .slick-slider .slick-prev:before,
-.simple-slider .slick-slider .slick-next:before {
+/* slider.css */
 
-    font-size: 25px !important;
-    line-height: 1 !important;
-    color: #2664ec !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
+.simple-slider {
+    margin: 20px;
+    padding:  20px 20px 20px 20px;
+    max-width: 290px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
-.slick-arrow {
-    font-size: 0; /* Hide the text */
-    /* Other styles */
-}
-
-.slick-arrow:before {
-    font-size: 24px; /* Set the font size for the arrow icon */
-    /* Other styles */
-}
-
 
 .simple-slider .slick-prev,
 .simple-slider .slick-next {
     z-index: 1;
-    font-size: 24px;
-    color: #333;
-    background-color: transparent;
+    font-size: 0;
+line-height: 0;
+position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
@@ -31,31 +25,123 @@
 
 .simple-slider .slick-prev {
     left: -35px !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px; /* Increase width as desired */
+    height: 40px; /* Increase height as desired */
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .simple-slider .slick-next {
     right: -35px !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.simple-slider .slick-prev:hover,
-.simple-slider .slick-next:hover {
-    color: #555;
+.simple-slider .custom-arrow {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.simple-slider {
-    margin: 20px;
-    padding: 20px;
-    max-width: 290px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+.simple-slider .slick-prev:before,
+.simple-slider .slick-next:before {
+    content: none !important;
 }
+
+.slick-track {
+    display: flex;
+    align-items: center;
+}
+
+.slick-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.slick-slide > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .slider-element {
+    box-sizing: border-box;
     display: inline-block;
     white-space: nowrap;
     text-align: center;
     background-color: rgba(204, 212, 255, 0.35);
     height: 32px;
+    max-width: fit-content;
     border-radius: 8px;
     padding: 0 1em;
+    margin: 0;
+    line-height: 33px;
+    vertical-align: middle;
+    font-family: 'Arial', sans-serif;
+    color: rgb(77,72,80);
+    font-weight: bold;
+}
+
+.simple-slider .slick-dots li button:before {
+    color: rgba(7, 76, 255, 0.35);
+    opacity: 1;
+}
+
+.simple-slider .slick-dots li.slick-active button:before {
+
+    color: rgb(7, 76, 255, 0.95);
+}
+
+.simple-slider .slick-dots li button:before {
+    font-size: 8px;
+
+}
+.slick-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -36px !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+.simple-slider .slick-dots li button {
+    padding: 0;
+}
+
+.simple-slider .slick-dots li button:before {
+    font-size: 8px;
+    color: rgba(7, 76, 255, 0.35);
+    opacity: 1;
+}
+
+.simple-slider .slick-dots li.slick-active button:before {
+    color: rgb(7, 76, 255, 0.95);
+}
+
+/* Adjust dot spacing */
+.simple-slider .slick-dots li {
+    margin: 0 5px !important;
 }
