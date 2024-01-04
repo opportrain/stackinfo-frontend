@@ -3,10 +3,11 @@ import './home_page.css';
 import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
 import Card from "../../shared_components/card/card";
-
 import Filters from "../../shared_components/filter/filter";
 import SelectedFilters from "../../shared_components/selected_filters_bar/selected_filters";
 import FeedbackModal from "../../shared_components/feedback-modal/feedback-modal";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 function HomePage () {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +33,7 @@ function HomePage () {
             </div>
             <div className="page-body">
                 <SelectedFilters/>
+                <SimpleBar  style={{ maxHeight: '100vh', width: '100%'}}>
                 <div className="main-container">
                     <div className="card-container">
                         <Card/>
@@ -48,6 +50,7 @@ function HomePage () {
                     </div>
                     <Filters/>
                 </div>
+                </SimpleBar>
             </div>
             {isModalOpen && <FeedbackModal closeModal={closeModal} />}
         </div>

@@ -51,6 +51,7 @@
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
+    margin-bottom: 50px;
 }
 .main-container{
     display: flex;
@@ -59,11 +60,40 @@
     align-content: flex-start;
     justify-content: flex-start;
 }
-.card-container{
+.card-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
-    justify-content: flex-start;
-    min-width:375px;
+    justify-content: space-evenly;
+    min-width: 375px;
+}
+
+/*.card-container::after {*/
+/*    content: "";*/
+/*    flex: auto;*/
+/*    min-width: calc(33.333% - 10px);
+/*}*/
+
+.my-scrollable-div {
+    direction: ltr;
+}
+.my-scrollable-div {
+    writing-mode: horizontal-tb;
+}
+.my-scrollable-div::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+.my-scrollable-div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.my-scrollable-div::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.my-scrollable-div::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

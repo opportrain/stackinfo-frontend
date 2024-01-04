@@ -28,6 +28,7 @@ hr {
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
+    margin: -10px 0 10px 0;
 }
 
 .card-logo {
@@ -37,10 +38,11 @@ hr {
 }
 
 .card-description {
-    padding: 0 0.5em;
+    padding: 0 0.5em 8px 0.5em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
 }
 
 .company-name {
@@ -55,4 +57,31 @@ hr {
 .company-slogan {
     color: #6D6D6D;
     font-size: 1em;
+    text-align: center;
+    width: 100%;
+    margin-top: 0.25em;
+}
+
+.card-body {
+    margin: -15px 0 0 0 ;
+    max-height: 10em;
+}
+.card-result {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.img-wraper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 53px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid #ECEDEC;
+    background: #FFF;
 }
