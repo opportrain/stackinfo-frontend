@@ -47,6 +47,14 @@ function HomePage () {
                         <Card/>
                         <Card/>
                         <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                        <Card/>
                     </div>
                     <Filters/>
                 </div>
