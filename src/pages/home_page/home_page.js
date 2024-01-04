@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './home_page.css';
 import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
@@ -9,6 +9,13 @@ import SelectedFilters from "../../shared_components/selected_filters_bar/select
 import FeedbackModal from "../../shared_components/feedback-modal/feedback-modal";
 
 function HomePage () {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = ()=>{
+        setIsModalOpen(true);
+    }
+    const closeModal = ()=>{
+        setIsModalOpen(false);
+    }
     return(
         <div className="page-wrapper">
             <div className="header">
@@ -17,7 +24,7 @@ function HomePage () {
             </div>
             <div className="feedback-container">
                 <div className="feedback-message">
-                    <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and suggestions by giving us <span className='text-blue-600'>feedback</span>.
+                    <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and suggestions by giving us <span onClick={openModal} className='text-blue-600'>feedback</span>.
                 </div>
                 <button className="filter-button">
                     <img src={Filter} alt="Filter Icon"/>
@@ -42,7 +49,7 @@ function HomePage () {
                     <Filters/>
                 </div>
             </div>
-            <FeedbackModal/>
+            {isModalOpen && <FeedbackModal closeModal={closeModal} />}
         </div>
     )
 }
