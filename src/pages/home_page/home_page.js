@@ -34,30 +34,30 @@ function HomePage () {
             <div className="page-body">
                 <SelectedFilters/>
                 <SimpleBar  style={{ maxHeight: '100vh', width: '100%'}}>
-                <div className="main-container">
-                    <div className="card-container">
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
+                    <div className="main-container">
+                        <div className="card-container">
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                            <Card/>
+                        </div>
+                        <Filters/>
                     </div>
-                    <Filters/>
-                </div>
                 </SimpleBar>
             </div>
             {isModalOpen && <FeedbackModal closeModal={closeModal} />}
