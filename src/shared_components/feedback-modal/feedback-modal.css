@@ -1,0 +1,210 @@
+.modal-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    overflow: auto;
+}
+
+.feedback-modal{
+    padding: 11px;
+    min-height: fit-content;
+    background-color: white;
+    border-radius: 12px;
+    width: calc(50vw + 0vh);
+    height: calc(0vw + 80vh);
+    overflow: auto;
+}
+
+.modal-content{
+    height: fit-content;
+    width: 100%;
+    & form{
+        height: 100%;
+        width: 100%;
+        min-height: fit-content;
+        /*
+        background-color: #666666;
+        */
+    }
+}
+
+.modal-header{
+    position: sticky;
+    min-height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    height: 3em;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DADADA;
+    >*{
+        height: fit-content;
+        width: fit-content;
+    }
+}
+
+.modal-title{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    align-self: center;
+    width: 150px;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.close-btn{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.modal-form-first-part{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 9em;
+    min-height: fit-content;
+    padding: 20px 0 40px 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DADADA;
+    font-weight: 500;
+    .question{
+        color: #2D2D2D;
+        font-size: 1.1em;
+        min-height: fit-content;
+    }
+    .sub-question{
+        color: #6D6D6D;
+        font-size: 0.8em;
+        min-height: fit-content;
+    }
+}
+
+.modal-form-second-part{
+    height: 13.7em;
+    padding: 20px 0 10px 10px;
+    min-height: fit-content;
+}
+
+.modal-form-third-part{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    height: 5.5em;
+    padding: 5px;
+    min-height: fit-content;
+}
+
+.option{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 65px;
+    & input[type="radio"] {
+        border: 3px solid #F1F1F1;
+        width: 1.1em;
+        height: 1.1em;
+    }
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.rate-question{
+    color: #2D2D2D;
+    font-size: 0.8em;
+    font-weight: 500;
+    min-height: fit-content;
+}
+
+.rate-options{
+    >*{
+        width: 5em;
+        height: 8.2em;
+        min-height: fit-content;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .rate-txt{
+        color: #6D6D6D;
+        font-weight: 500;
+        font-size: 0.7em;
+        text-align: center;
+    }
+    & input[type="radio"]{
+        display: none;
+    }
+    & label {
+        cursor: pointer;
+        margin: 20px 15px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+    & img:hover {
+        scale: 1.05;
+    }
+    & input[type="radio"] + img {
+        height: 5em;
+        width: 100%;
+        border-radius: 100%;
+        padding: 2px;
+    }
+    & input[type="radio"]:checked + img {
+        border: 1px solid rgb(8, 18, 255);
+        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.53);
+    }
+    .option-1{
+        background-color: #F3ABA7;
+    }
+    .option-2{
+        background-color: #F4CE9B;
+    }
+    .option-3{
+        background-color: #B4E5BC;
+    }
+    .option-4{
+        background-color: #B8DFF2;
+    }
+    .option-5{
+        background-color: #CCC1F0;
+    }
+}
+
+.text-area {
+    width: 50%;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 1px 0 rgba(0, 0, 0, 0.20);
+    font-size: 0.8em;
+    padding: 10px;
+    resize: none;
+}
+
+.text-area:focus{
+    border: none;
+    outline: none;
+}
+
+.submit-btn{
+    background-color: #0812FF;
+    color: white;
+    height: fit-content;
+    width: fit-content;
+    padding: 8px 17px 8px 17px;
+    border-radius: 8px;
+    font-weight: 400;
+}

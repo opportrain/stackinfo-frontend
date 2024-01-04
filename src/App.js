@@ -2,6 +2,7 @@ import './App.css';
 import HomePage from "./pages/home_page/home_page";
 import Navbar from "./shared_components/navbar/navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from "react";
 function App() {
   return (
     <div className="App">
