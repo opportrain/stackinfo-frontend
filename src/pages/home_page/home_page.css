@@ -69,7 +69,7 @@
     min-width: 375px;
 }
 
-/*.card-container::after {*/
+/*.card-body-container::after {*/
 /*    content: "";*/
 /*    flex: auto;*/
 /*    min-width: calc(33.333% - 10px);

@@ -1,12 +1,12 @@
 import React from 'react';
 import './card.css'
-import testLogo from '../../assets/test_card_logo.svg';
+import testLogo from '../../assets/card/card-logos/test_card_logo.svg';
 import SimpleSlider from "./slider";
-import nextJsLogo from '../../assets/results/nextJs.svg';
-import kafkaLogo from '../../assets/results/kafka.svg';
-import dokerLogo from '../../assets/results/docker.svg';
-import javaLogo from '../../assets/results/java.svg';
-import mongoLogo from '../../assets/results/mongoDB.svg';
+import nextJsLogo from '../../assets/card/card-results/nextJs.svg';
+import kafkaLogo from '../../assets/card/card-results/kafka.svg';
+import dokerLogo from '../../assets/card/card-results/docker.svg';
+import javaLogo from '../../assets/card/card-results/java.svg';
+import mongoLogo from '../../assets/card/card-results/mongoDB.svg';
 function Card () {
 return (
     <div className="card">
