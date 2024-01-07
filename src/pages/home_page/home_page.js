@@ -34,29 +34,31 @@ function HomePage () {
             <div className="page-body">
                 <SelectedFilters/>
                     <div className="main-container">
-                        <SimpleBar  style={{ maxHeight: '100vh', width: '100%'}}>
-                            <div className="card-container">
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                                <Card/>
-                            </div>
-                        </SimpleBar>
+                        <div className="barWrapper">
+                            <SimpleBar  style={{ maxHeight: '100vh'}}>
+                                <div className="card-container">
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                    <Card/>
+                                </div>
+                            </SimpleBar>
+                        </div>
                         <Filters/>
                     </div>
 
