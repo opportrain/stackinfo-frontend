@@ -1,10 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
-import './slider.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import rightArrow from '../../assets/right_arrow.svg'; // Ensure the path is correct
-import leftArrow from '../../assets/left_arrow.svg';  // Ensure the path is correct
+import './slider.css';
+import rightArrow from '../../assets/card/card-body/right_arrow.svg';
+import leftArrow from '../../assets/card/card-body/left_arrow.svg';
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -27,7 +27,7 @@ function SamplePrevArrow(props) {
         />
     );
 }
-const colors = ['rgba(204, 212, 255, 0.35)', 'rgba(162,210,255,0.35)', 'rgba(255,200,221,0.35)']; // Add more colors as needed
+const colors = ['rgba(204, 212, 255, 0.35)', 'rgba(162,210,255,0.35)', 'rgba(255,200,221,0.35)'];
 
 function SimpleSlider() {
     const settings = {

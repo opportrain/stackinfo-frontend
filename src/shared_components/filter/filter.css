@@ -1,6 +1,7 @@
 .filters-container{
     background-color: #FFF;
     min-width: 335px;
+    max-width: 600px;
     height: 500px;
     border-radius: 12px;
     margin: 20px 0 100px 0;
