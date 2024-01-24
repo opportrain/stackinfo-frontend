@@ -2,11 +2,35 @@
     background-color: #FFF;
     min-width: 335px;
     max-width: 600px;
-     height: 500px;
+    height: 500px;
     border-radius: 12px;
     margin: 20px 0 100px 0;
     text-align: center;
     position: sticky;
     top: 20px;
-    z-index: 10;
+    overflow: auto;
+}
+.filters-title{
+    color: #2D2D2D;
+    border-bottom: 1px solid #ECEDEC;
+    padding: 12px 142px 12px 142px;
+    margin-bottom: 13px;
+}
+.reset-btn{
+    background-color: #0812FF;
+    width: fit-content;
+    color: white;
+    padding: 5px 18px 5px 18px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+.filters-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 0 15px 0 15px;
+}
+.main-filter{
+    margin-bottom: 15px;
 }
