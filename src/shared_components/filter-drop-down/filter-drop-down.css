@@ -6,6 +6,7 @@
     padding: 0 10px 0 10px;
     border-radius: 8px;
     background-color: #E6EDF9;
+    font-size: 0.9em;
 }
 .filter-option{
     display: flex;
@@ -22,8 +23,7 @@
     flex-direction: column;
     align-items: start;
     font-size: 0.7em;
-    height: 180px;
-    overflow:auto;
+    height: fit-content;
     padding-left: 15px;
     >*{
         position: static;

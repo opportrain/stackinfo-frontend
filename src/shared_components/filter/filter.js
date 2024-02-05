@@ -23,8 +23,10 @@ function Filters() {
                 }}>
                     Reset Filters
                 </button>
-                <FilterDropDown title="Languages" options={languagesOptions}/>
-                <FilterDropDown title="Technologies" options={technologiesOptions}/>
+                <div className="filter-drowpdowns-container">
+                    <FilterDropDown title="Languages" options={languagesOptions}/>
+                    <FilterDropDown title="Technologies" options={technologiesOptions}/>
+                </div>
             </div>
         </div>
     );

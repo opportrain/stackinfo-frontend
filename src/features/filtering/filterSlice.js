@@ -7,21 +7,19 @@ export const filterSlice = createSlice({
     initialState,
     reducers:{
         addFilter: (state, action)=>{
-            state.filters = [...state.filters, action.payload];
+            if (!state.filters.some((filter) => filter === action.payload)) {
+                state.filters = [...state.filters, action.payload];
+            }
         },
         removeFilter: (state, action)=>{
             state.filters = state.filters.filter((el)=>{
                 return el !== action.payload;
             })
         },
-        addFilters: (state, action)=>{
-            state.filters = state.filters.concat(action.payload);
-        },
         resetFilters: (state)=>{
             state.filters = [];
-            console.log(state.filters)
         }
     }
 })
-export const {addFilter, removeFilter, addFilters, resetFilters} = filterSlice.actions;
+export const {addFilter, removeFilter, resetFilters} = filterSlice.actions;
 export default filterSlice.reducer;

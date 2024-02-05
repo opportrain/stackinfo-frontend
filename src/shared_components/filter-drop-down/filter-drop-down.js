@@ -1,31 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import './filter-drop-down.css'
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {useSelector, useDispatch} from "react-redux";
-import {addFilter, removeFilter, addFilters} from "../../features/filtering/filterSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {addFilter, removeFilter} from "../../features/filtering/filterSlice";
 
 function FilterDropDown ({title, options}) {
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const dispatch = useDispatch();
     let allOptions = options;
-    const [isAllChecked, setIsAllChecked] = useState(false);
-    const [checkedOptions, setCheckedOptions] = useState([]);
     const [isDropDownOpened, setIsDropDownOpened] = useState(false);
-    useEffect(() => {
-        if (checkedOptions.length === allOptions.length) {
-            setIsAllChecked(true);
-        } else {
-            setIsAllChecked(false);
-        }
-    }, [checkedOptions]);
-
-    useEffect(() => {
-        setCheckedOptions(selectedFilters)
-
-    }, [selectedFilters]);
+    const [checkedOptionsLocalArr, setCheckedOptionsLocalArr] = useState([]);
     function getOptionList(){
         let optionsList = [];
         for (let x = 0; x < allOptions.length; x++) {
@@ -43,7 +29,7 @@ function FilterDropDown ({title, options}) {
         return optionsList;
     }
     function optionChecked(e) {
-        setCheckedOptions(prevOptions => {
+        setCheckedOptionsLocalArr(prevOptions => {
             if (e.target.checked) {
                 dispatch(addFilter(e.target.name));
                 return [...prevOptions, e.target.name];
@@ -55,36 +41,33 @@ function FilterDropDown ({title, options}) {
     }
     function checkAllOptions(e){
         if(e.target.checked){
-            setCheckedOptions(allOptions);
-            dispatch(addFilters(allOptions))
-            setIsAllChecked(true);
+            setCheckedOptionsLocalArr(allOptions);
+            allOptions.forEach((option)=> dispatch(addFilter(option)))
         }
         else{
-            setCheckedOptions([]);
+            setCheckedOptionsLocalArr([]);
             allOptions.forEach((option)=> dispatch(removeFilter(option)))
-            setIsAllChecked(false);
         }
     }
     function checkIfOptionChecked(option) {
-        return isAllChecked || selectedFilters.some((opt) => opt === option);
+        return selectedFilters.some((opt) => opt === option);
+    }
+    function checkIfAllOptionsChecked(){
+        return allOptions.every(element => selectedFilters.includes(element));
     }
     return (
         <div className="dropdown">
-            <div className="dropdown-title" onClick={(e)=>{
-                e.stopPropagation();
-                setIsDropDownOpened(!isDropDownOpened);
-            }}>
-                <FormControlLabel
-                label={title}
-                control={
+            <div className="dropdown-title">
+                <div>
                     <Checkbox
-                        checked={isAllChecked}
-                        indeterminate={checkedOptions.length > 0 &&  checkedOptions.length !== allOptions.length}
-                        onChange={checkAllOptions}
-                    />
-                }
-                />
-                {isDropDownOpened ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                        checked={checkIfAllOptionsChecked()}
+                        indeterminate={checkedOptionsLocalArr.length > 0 &&  checkedOptionsLocalArr.length !== allOptions.length}
+                        onChange={checkAllOptions}/>
+                <span onClick={()=>{setIsDropDownOpened(!isDropDownOpened);}}>
+                    {title}
+                </span>
+                </div>
+                <div onClick={()=>{setIsDropDownOpened(!isDropDownOpened);}}>{isDropDownOpened ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}</div>
             </div>
             {isDropDownOpened ? <div className={'options-list'}>{getOptionList()}</div> : null}
         </div>

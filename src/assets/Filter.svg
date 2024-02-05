@@ -1,10 +1,7 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Frame" clip-path="url(#clip0_198_63)">
-<path id="Vector" d="M4 4H20V6.172C19.9999 6.70239 19.7891 7.21101 19.414 7.586L15 12V19L9 21V12.5L4.52 7.572C4.18545 7.20393 4.00005 6.7244 4 6.227V4Z" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Sort">
+<path id="Vector 7" d="M5 7H19" stroke="#F1F1F1" stroke-linecap="round"/>
+<path id="Vector 8" d="M7 12H17" stroke="#F1F1F1" stroke-linecap="round"/>
+<path id="Vector 9" d="M9 17H15" stroke="#F1F1F1" stroke-linecap="round"/>
 </g>
-<defs>
-<clipPath id="clip0_198_63">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
-</defs>
 </svg>
