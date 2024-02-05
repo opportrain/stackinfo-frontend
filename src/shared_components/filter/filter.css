@@ -2,13 +2,12 @@
     background-color: #FFF;
     min-width: 335px;
     max-width: 600px;
-    height: 500px;
+    height: 95%;
     border-radius: 12px;
     margin: 20px 0 100px 0;
     text-align: center;
     position: sticky;
     top: 20px;
-    overflow: auto;
 }
 .filters-title{
     color: #2D2D2D;
@@ -30,7 +29,13 @@
     flex-direction: column;
     justify-content: start;
     padding: 0 15px 0 15px;
+    height: 600px;
+    overflow: auto;
 }
 .main-filter{
     margin-bottom: 15px;
+}
+.filter-drowpdowns-container{
+    height: 600px;
+    overflow: auto;
 }
