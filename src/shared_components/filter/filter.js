@@ -10,8 +10,6 @@ function Filters() {
     const technologiesOptions = ["Angular", "ReactJS", "React", "ExpressJS"]
     const dispatch = useDispatch();
 
-
-    // Render the filters container with the dynamic height
     return (
         <div className='filters-container'>
             <div className="filters-title">

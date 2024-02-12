@@ -55,10 +55,8 @@ function HomePage () {
                         dispatch(resetFilters())
                     }}>Clear All</button> : null }
                 </div>
-                        <div className="main-container">
-                        <div className="barWrapper">
-                            <SimpleBar  style={{ maxHeight: '100vh'}}>
-                                <div className="card-container">
+                <div className="main-container">
+                    <div className="card-container">
                                     <Card/>
                                     <Card/>
                                     <Card/>
@@ -78,12 +76,9 @@ function HomePage () {
                                     <Card/>
                                     <Card/>
                                     <Card/>
-                                </div>
-                            </SimpleBar>
                         </div>
-                        { isFiltersShowed ? <Filters/> : null }
+                    { isFiltersShowed ? <Filters/> : null }
                     </div>
-
             </div>
             {isModalOpen && <FeedbackModal closeModal={closeModal} />}
         </div>
