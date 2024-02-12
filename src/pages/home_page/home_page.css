@@ -139,3 +139,6 @@
 .selected-filters::-webkit-scrollbar {
     display: none;
 }
+.feedback-click:hover{
+    cursor: pointer;
+}
