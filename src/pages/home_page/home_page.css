@@ -39,8 +39,8 @@
     border-radius: 8px;
     background: #074CFF;
     padding: 5px 15px 5px 10px;
-    width: 170px;
-    min-width: fit-content;
+    width: fit-content;
+    height: fit-content;
     margin: 5px;
     color: white;
     & span {
@@ -87,10 +87,6 @@
 .card-container::-webkit-scrollbar {
     display: none;
 }
-
-.hide-filters{
-    rotate: 180deg;
-}
 .filter-tag{
     display: flex;
     justify-content: space-around;
@@ -103,6 +99,8 @@
     margin-bottom: 12px;
     font-size: 0.9em;
     font-weight: 400;
+    width: fit-content;
+    white-space: nowrap;
 }
 .remove-filter-btn{
     display: flex;
@@ -119,6 +117,7 @@
     align-items: center;
     justify-content: space-between;
     height: 60px;
+    width: 100%;
 }
 .clear-all-btn{
     background-color: #074CFF;
