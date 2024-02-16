@@ -18,7 +18,7 @@ function Navbar () {
             <div className="search-bar-container">
                 <SearchOutlinedIcon className="search-icon"/>
                 <input
-                    onClick={handleSearchBarClick}
+                    // onClick={handleSearchBarClick}
                     className="search-bar"
                     type="text"
                     placeholder="Company, city, technology, language..."/>

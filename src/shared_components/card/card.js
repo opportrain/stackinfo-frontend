@@ -1,20 +1,20 @@
 import React from 'react';
 import './card.css'
-import testLogo from '../../assets/card/card-logos/test_card_logo.svg';
 import SimpleSlider from "./slider";
+
 import nextJsLogo from '../../assets/card/card-results/nextJs.svg';
 import kafkaLogo from '../../assets/card/card-results/kafka.svg';
 import dokerLogo from '../../assets/card/card-results/docker.svg';
 import javaLogo from '../../assets/card/card-results/java.svg';
 import mongoLogo from '../../assets/card/card-results/mongoDB.svg';
-function Card () {
+function Card (props) {
 return (
     <div className="card">
         <div className="head">
-                <img className="card-logo" src={testLogo} alt="card-logo"/>
+                <img className="card-logo" src={props.logo} alt="card-logo"/>
                 <div className="card-description">
-                        <div className="company-name"> Radix Technologies</div>
-                        <div className="company-slogan"> It's about the code quality</div>
+                        <div className="company-name">{props.name}</div>
+                        <div className="company-slogan">{props.slogan}</div>
                 </div>
         </div>
         <hr/>

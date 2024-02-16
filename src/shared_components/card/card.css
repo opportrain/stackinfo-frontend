@@ -73,6 +73,16 @@ hr {
     align-content: flex-end;
     flex-wrap: wrap;
     align-items: center;
+
+    /*display: flex;*/
+    /*align-items: end;*/
+    /*flex-direction: row;*/
+    overflow-y: auto;
+    /*width: 88%;*/
+    height: 100%;
+}
+.card-result::-webkit-scrollbar {
+    display: none;
 }
 .img-wraper {
     display: flex;

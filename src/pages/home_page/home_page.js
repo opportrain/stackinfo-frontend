@@ -10,6 +10,17 @@ import {useDispatch, useSelector} from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
 import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 import Footer from "../../shared_components/footer/footer";
+
+
+
+import testLogo from '../../assets/card/card-logos/test_card_logo.svg';
+import nextJsLogo from '../../assets/card/card-results/nextJs.svg';
+import kafkaLogo from '../../assets/card/card-results/kafka.svg';
+import dokerLogo from '../../assets/card/card-results/docker.svg';
+import javaLogo from '../../assets/card/card-results/java.svg';
+import mongoLogo from '../../assets/card/card-results/mongoDB.svg';
+
+
 function HomePage () {
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const dispatch = useDispatch();
@@ -57,7 +68,11 @@ function HomePage () {
                 </div>
                 <div className="main-container">
                     <div className="card-container">
-                                    <Card/>
+                                    <Card
+                                    logo={testLogo}
+                                    name={"Radix Technologies"}
+                                    slogan={"It's about the code quality"}
+                                    />
                                     <Card/>
                                     <Card/>
                                     <Card/>
