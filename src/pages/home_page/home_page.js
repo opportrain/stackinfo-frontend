@@ -10,6 +10,7 @@ import 'simplebar/dist/simplebar.min.css';
 import {useDispatch, useSelector} from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
 import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
+import Footer from "../../shared_components/footer/footer";
 function HomePage () {
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function HomePage () {
 
             </div>
             {isModalOpen && <FeedbackModal closeModal={closeModal} />}
+            <Footer/>
         </div>
     )
 }
