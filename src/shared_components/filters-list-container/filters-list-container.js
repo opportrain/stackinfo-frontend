@@ -1,17 +1,26 @@
 // Import the `useEffect` and `useState` hooks from React.
 import React, { useState, useEffect } from 'react';
-import './filter.css';
+import './filter-list-container.css';
 import FilterDropDown from "../filter-drop-down/filter-drop-down";
 import {useDispatch} from "react-redux";
 import {resetFilters} from "../../features/filtering/filterSlice";
+import {getFiltersList} from "../../services/filtering"
 
-function Filters() {
-    const languagesOptions = ["C++", "Kotlin", "Java", "C#", "Python", "Swift", "Javascript", "Typescript"]
-    const technologiesOptions = ["Angular", "ReactJS", "React", "ExpressJS"]
+function FiltersListContainer() {
+    const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
-
-
-    // Render the filters container with the dynamic height
+    useEffect(() => {
+        getFiltersList().then(res=>{
+            setFilters(res.filters);
+        });
+    }, []);
+    function getFiltersDropDowns(filters){
+        let dropDownList = [];
+        for(let filter in filters){
+            dropDownList.push(<FilterDropDown title={filter} options={filters[filter]}/>);
+        }
+        return dropDownList;
+    }
     return (
         <div className='filters-container'>
             <div className="filters-title">
@@ -24,12 +33,11 @@ function Filters() {
                     Reset Filters
                 </button>
                 <div className="filter-drowpdowns-container">
-                    <FilterDropDown title="Languages" options={languagesOptions}/>
-                    <FilterDropDown title="Technologies" options={technologiesOptions}/>
+                    {getFiltersDropDowns(filters)}
                 </div>
             </div>
         </div>
     );
 }
 
-export default Filters;
+export default FiltersListContainer;
