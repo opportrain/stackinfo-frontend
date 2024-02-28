@@ -1,0 +1,17 @@
+.searching-container{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    align-self: center;
+}
+
+.body-searching{
+    color: #6D6D6D;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.6px;
+    padding-top: 40px;
+}

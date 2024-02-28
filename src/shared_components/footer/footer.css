@@ -1,8 +1,9 @@
 .footer{
     display: flex;
-    height: 200px;
-    background: #FFF;
+    height: 323px;
+    /*background: #FFF;*/
     flex-direction: column;
+    box-shadow: 0 0 15px #e0e0e1;
 
     justify-content: space-around;
     align-items: center;
@@ -10,9 +11,26 @@
     text-align: center;
     padding: 10px;
     padding-bottom: 50px;
+    overflow: auto;
     /*margin-left: -20px;*/
     /*margin-right: -20px;*/
 }
 .copyright{
 
+}
+.footer-span{
+    color: #0FA4F8;
+    font-size: 20px;
+    font-weight: 600;
+}
+.social-icons-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: fit-content;
+}
+.icon{
+    margin: 0 6px;
+    /*height: 40px;*/
+    /*width: 40px;*/
 }

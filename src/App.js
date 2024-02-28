@@ -1,7 +1,8 @@
 import './App.css';
 import HomePage from "./pages/home_page/home_page";
 import Navbar from "./shared_components/navbar/navbar";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React, {useState} from "react";
 import Footer from "./shared_components/footer/footer";
 import SearchWindow from "./shared_components/search-model/search-window";
@@ -12,7 +13,7 @@ function App() {
 
     const toggleSearchWindow = (width) => {
         if (!isSearchWindowVisible) {
-            setSearchBarWidth(width); // Set the width only when opening
+            setSearchBarWidth(width);
         }
         setSearchWindowVisible(!isSearchWindowVisible);
     };
@@ -20,11 +21,15 @@ function App() {
     <div className="App">
         <Navbar toggleSearchWindow={toggleSearchWindow}/>
         {isSearchWindowVisible && <SearchWindow width={searchBarWidth} closeModal={() => setSearchWindowVisible(false)} />}
-        <BrowserRouter>
+        <Router>
             <Routes>
                 <Route path="/" element={<HomePage/>}></Route>
             </Routes>
-        </BrowserRouter>
+            {/*<Routes>*/}
+            {/*    <Route path="/" element={ <Footer />}></Route>*/}
+            {/*</Routes>*/}
+            {/*<Footer />*/}
+        </Router>
         {/*<Footer />*/}
     </div>
   );

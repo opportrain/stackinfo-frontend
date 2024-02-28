@@ -15,10 +15,12 @@
 }
 .title{
     /*display: flex;*/
+    /*font-family: "Nunito";*/
     align-items: end;
     min-width: fit-content;
     text-align: center;
     font-size: 1.4em;
+    font-weight: 700;
     color: #232323;
     padding: 8px;
     font-family: 'Bitter', serif;
@@ -81,5 +83,5 @@
     font-size: 1.5em !important;
 }
 .logo-span{
-    color: rgba(2, 63, 227, 0.95);
+    color: #0FA4F8;
 }
