@@ -83,12 +83,27 @@ position: absolute;
     height: 100%;
 }
 
+.purple{
+    background-color: rgba(204, 212, 255, 0.35);
+}
+.red{
+    background-color: rgba(255, 158, 158, 0.21);
+}
+.blue{
+    background-color: rgba(162,210,255,0.35);
+}
+.pink{
+    background-color: rgba(255, 171, 198, 0.35);
+}
+.grean{
+    background-color: rgba(167, 255, 161, 0.3);
+}
 .slider-element {
     box-sizing: border-box;
     display: inline-block;
     white-space: nowrap;
     text-align: center;
-    background-color: rgba(204, 212, 255, 0.35);
+    /*background-color: rgba(204, 212, 255, 0.35);*/
     height: 32px;
     max-width: fit-content;
     border-radius: 8px;
@@ -138,7 +153,7 @@ position: absolute;
 }
 
 .simple-slider .slick-dots li.slick-active button:before {
-    color: rgb(7, 76, 255, 0.95);
+    color: #0FA4F8
 }
 
 .simple-slider .slick-dots li {

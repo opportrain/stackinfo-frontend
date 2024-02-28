@@ -14,11 +14,13 @@
     }
 }
 .title{
-    display: flex;
+    /*display: flex;*/
+    /*font-family: "Nunito";*/
     align-items: end;
     min-width: fit-content;
     text-align: center;
     font-size: 1.4em;
+    font-weight: 700;
     color: #232323;
     padding: 8px;
     font-family: 'Bitter', serif;
@@ -79,4 +81,7 @@
 }
 .icon{
     font-size: 1.5em !important;
+}
+.logo-span{
+    color: #0FA4F8;
 }

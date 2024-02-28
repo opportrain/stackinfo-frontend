@@ -4,6 +4,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import AppsIcon from '@mui/icons-material/Apps';
 import LightModeIcon from '@mui/icons-material/LightMode';
+
 function Navbar () {
 /*    const [mode, setMode] = useState(true);
     const toggleMode = () => {
@@ -17,9 +18,11 @@ function Navbar () {
             <div className="search-bar-container">
                 <SearchOutlinedIcon className="search-icon"/>
                 <input
+                    // onClick={handleSearchBarClick}
                     className="search-bar"
                     type="text"
                     placeholder="Company, city, technology, language..."/>
+                {/*{isSearchWindowVisible && <SearchWindow width={searchBarWidth} closeModal={closeModal} />}*/}
             </div>
             <div className="actions">
 {/*                <button className="actions-button moon-icon" onClick={toggleMode}>
