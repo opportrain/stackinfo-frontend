@@ -19,10 +19,10 @@ html, body, #root {
   background-color: #EBF1FA;
 }
 .page-wrapper{
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 101vw;
   padding: 25px;
-  position: fixed;
+  position: static;
   overflow: auto;
   background-color: #EBF1FA;
 }

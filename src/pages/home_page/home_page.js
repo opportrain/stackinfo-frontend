@@ -99,7 +99,9 @@ function HomePage() {
             </div>
         </div>
         {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
+{/*
         <Footer/>
+*/}
     </div>)
 }
 export default HomePage;

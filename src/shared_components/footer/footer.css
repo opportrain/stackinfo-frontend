@@ -1,4 +1,6 @@
 .footer{
+    position: static;
+    top: 0;
     font-family: "Nunito", serif;
     display: flex;
     height: 323px;
@@ -10,7 +12,6 @@
     align-items: center;
     align-content: center;
     text-align: center;
-    padding: 10px 10px 50px;
     overflow: auto;
     /*margin-left: -20px;*/
     /*margin-right: -20px;*/
