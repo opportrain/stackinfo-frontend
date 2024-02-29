@@ -92,7 +92,7 @@
     justify-content: space-around;
     align-items: center;
     border-radius: 50px;
-    background-color: #0812FF;
+    background-color: #0FA4F8;
     padding: 6px 15px;
     color: white;
     margin-right: 12px;
@@ -140,4 +140,12 @@
 }
 .feedback-click:hover{
     cursor: pointer;
+}
+
+.spinner-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }

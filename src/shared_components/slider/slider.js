@@ -12,7 +12,6 @@ function SimpleSlider(props) {
     // const colors = ["rgba(204, 212, 255, 0.35)", "rgba(162,210,255,0.35)", "rgba(255,200,221,0.35)"];
     const colors = ['purple','red', 'blue', 'pink','grean'];
     const availableStacks = props.availableStacks;
-    console.log("Available Stacks:", availableStacks);
 
     const elements = availableStacks.map((item, index) => {
         const colorIndex = index % colors.length;

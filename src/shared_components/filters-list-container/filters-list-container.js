@@ -17,7 +17,7 @@ function FiltersListContainer() {
     function getFiltersDropDowns(filters){
         let dropDownList = [];
         for(let filter in filters){
-            dropDownList.push(<FilterDropDown title={filter} options={filters[filter]}/>);
+            dropDownList.push(<FilterDropDown title={filter} options={filters[filter]} key={filter}/>);
         }
         return dropDownList;
     }
