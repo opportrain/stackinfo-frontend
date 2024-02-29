@@ -78,10 +78,10 @@ function HomePage() {
         <div className="page-body">
             <div className='selected-filters-container'>
                 <div className="selected-filters">{selectedFilters.map((filter) => (
-                    <div className="filter-tag" key={filter.filterName}>
-                        <div>{filter.filterName}</div>
+                    <div className="filter-tag" key={filter}>
+                        <div>{filter}</div>
                         <button className="remove-filter-btn" onClick={() => {
-                            dispatch(removeFilter(filter.filterName))
+                            dispatch(removeFilter(filter))
                         }}>
                             <CloseIcon style={{fontSize: 14}}/>
                         </button>
