@@ -20,7 +20,7 @@ html, body, #root {
 }
 .page-wrapper{
   height: 100vh;
-  width: 101vw;
+  width: 100%;
   padding: 25px;
   position: static;
   overflow: auto;
