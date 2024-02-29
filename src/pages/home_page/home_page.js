@@ -66,7 +66,7 @@ function HomePage() {
             <div className="feedback-message">
                 <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and
                 suggestions by giving us <span onClick={openModal}
-                                               className='text-blue-600 feedback-click'>feedback</span>.
+                                               className='feedback-click'>feedback</span>.
             </div>
             <button className="filter-button" onClick={() => {
                 setIsFiltersShowed(!isFiltersShowed);

@@ -138,6 +138,9 @@
 .selected-filters::-webkit-scrollbar {
     display: none;
 }
+.feedback-click{
+    color: #0FA4F8;
+}
 .feedback-click:hover{
     cursor: pointer;
 }
