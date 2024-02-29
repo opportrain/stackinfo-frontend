@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './card.css'
-import SimpleSlider from "./slider";
+import SimpleSlider from "../slider/slider";
 
 function Card (props) {
     const stacks=props.stacks
@@ -9,7 +9,6 @@ function Card (props) {
     const [SelectedIcons ,setIcons]=useState([])
 
     const changeStack = (newStack) => {
-        console.log("Changing stack to:", newStack);
         setSelectedStack(newStack);
         chnageIcons();
     }

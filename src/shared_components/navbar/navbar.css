@@ -15,7 +15,7 @@
 }
 .title{
     /*display: flex;*/
-    /*font-family: "Nunito";*/
+    font-family: "Nunito", serif;
     align-items: end;
     min-width: fit-content;
     text-align: center;
@@ -23,7 +23,6 @@
     font-weight: 700;
     color: #232323;
     padding: 8px;
-    font-family: 'Bitter', serif;
     .logo{
         padding: 8px;
         width: 2.4em;

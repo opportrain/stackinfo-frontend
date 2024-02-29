@@ -4,21 +4,27 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import AppsIcon from '@mui/icons-material/Apps';
 import LightModeIcon from '@mui/icons-material/LightMode';
-
-function Navbar () {
-/*    const [mode, setMode] = useState(true);
-    const toggleMode = () => {
-        setMode(!mode);
-    };*/
-    return(
+import {useDispatch} from "react-redux";
+import {changeSearchToken} from "../../features/filtering/filterSlice";
+function Navbar() {
+    /*    const [mode, setMode] = useState(true);
+        const toggleMode = () => {
+            setMode(!mode);
+        };*/
+    const dispatch = useDispatch();
+    const applySearch = (e) => {
+        dispatch(changeSearchToken(e.target.value));
+    }
+    return (
         <div className="navbar">
             <div className="title">
-                <div>Stack<span style={{color: "#2560fc"}}>Info</span></div>
+                <div>Stack<span className="logo-span">Info</span></div>
             </div>
             <div className="search-bar-container">
                 <SearchOutlinedIcon className="search-icon"/>
                 <input
                     // onClick={handleSearchBarClick}
+                    onChange={applySearch}
                     className="search-bar"
                     type="text"
                     placeholder="Company, city, technology, language..."/>
