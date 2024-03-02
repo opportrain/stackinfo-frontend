@@ -6,7 +6,15 @@ import './slider.css';
 import rightArrow from '../../assets/card/card-body/right_arrow.svg';
 import leftArrow from '../../assets/card/card-body/left_arrow.svg';
 
+const stacksMap = {
+    'dba': 'DBA',
+    'devops': 'DevOps',
+    'data_analytics': 'Data Analytics',
+}
 
+const colorsMap = {
+
+}
 
 function SimpleSlider(props) {
     // const colors = ["rgba(204, 212, 255, 0.35)", "rgba(162,210,255,0.35)", "rgba(255,200,221,0.35)"];
@@ -16,9 +24,11 @@ function SimpleSlider(props) {
     const elements = availableStacks.map((item, index) => {
         const colorIndex = index % colors.length;
         const colorClass = colors[colorIndex];
-        if (item === 'dba') item = 'DBA';
-        if (item === 'devops') item = 'DevOps';
-        item = item.charAt(0).toUpperCase() + item.slice(1);
+        if (stacksMap[item]) {
+            item = stacksMap[item]
+        } else {
+            item = item.charAt(0).toUpperCase() + item.slice(1)
+        }
         return (<div className={`slider-element ${colorClass}`} key={item}>
             {item}
         </div>);
