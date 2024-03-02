@@ -72,18 +72,15 @@ function FilterDropDown({title, options}) {
     }
 
     function checkIfAllOptionsChecked() {
-        if (selectedFilters.length === 0) {
+        if (checkedOptionsLocalArr.length === 0) {
             setIsAllChecked(false)
         } else setIsAllChecked(allOptions.length === checkedOptionsLocalArr.length);
     }
 
     function checkIfIndeterminate() {
-        if (selectedFilters.length === 0 || isAllChecked) {
-            setIsIndeterminate(false)
-        }
-        if (checkedOptionsLocalArr.length > 0 && checkedOptionsLocalArr.length !== allOptions.length) {
+        if (checkedOptionsLocalArr.length > 0 && checkedOptionsLocalArr.length < allOptions.length) {
             setIsIndeterminate(true)
-        }
+        } else setIsIndeterminate(false)
     }
 
     useEffect(() => {
