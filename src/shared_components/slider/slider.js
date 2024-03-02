@@ -1,4 +1,4 @@
-import {React,useState} from 'react';
+import {React, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -10,18 +10,18 @@ import leftArrow from '../../assets/card/card-body/left_arrow.svg';
 
 function SimpleSlider(props) {
     // const colors = ["rgba(204, 212, 255, 0.35)", "rgba(162,210,255,0.35)", "rgba(255,200,221,0.35)"];
-    const colors = ['purple','red', 'blue', 'pink','grean'];
-    const availableStacks = props.availableStacks;
+    const colors = ['purple', 'red', 'blue', 'pink', 'green'];
+    const availableStacks = props.stacks.available_stacks;
 
     const elements = availableStacks.map((item, index) => {
         const colorIndex = index % colors.length;
         const colorClass = colors[colorIndex];
-
-        return (
-            <div className={`slider-element ${colorClass}`} key={item}>
-                {item}
-            </div>
-        );
+        if (item === 'dba') item = 'DBA';
+        if (item === 'devops') item = 'DevOps';
+        item = item.charAt(0).toUpperCase() + item.slice(1);
+        return (<div className={`slider-element ${colorClass}`} key={item}>
+            {item}
+        </div>);
     });
 
 
@@ -38,13 +38,10 @@ function SimpleSlider(props) {
         }
 
         setSelectedStackIndex(newIndex);
-
-        const newStack = availableStacks[newIndex];
-        props.changeStack(newStack);
     };
 
     function SampleNextArrow(props) {
-        const { className, style, onClick, currentStack } = props;
+        const {className, style, onClick, currentStack} = props;
         const handleNextClick = () => {
             if (onClick) {
                 onClick();
@@ -52,17 +49,20 @@ function SimpleSlider(props) {
                 // props.changeStack(currentStack);
             }
         };
-        return (
-            <div
-                className={className}
-                style={{ ...style, display: 'block', background: `url(${rightArrow}) no-repeat center center`, backgroundSize: 'contain' }}
-                onClick={handleNextClick}
-            />
-        );
+        return (<div
+            className={className}
+            style={{
+                ...style,
+                display: 'block',
+                background: `url(${rightArrow}) no-repeat center center`,
+                backgroundSize: 'contain'
+            }}
+            onClick={handleNextClick}
+        />);
     }
 
     function SamplePrevArrow(props) {
-        const { className, style, onClick, currentStack } = props;
+        const {className, style, onClick, currentStack} = props;
         const handlePrevClick = () => {
             if (onClick) {
                 onClick();
@@ -70,21 +70,33 @@ function SimpleSlider(props) {
                 // props.changeStack(currentStack);
             }
         };
-        return (
-            <div
-                className={className}
-                style={{ ...style, display: 'block', background: `url(${leftArrow}) no-repeat center center`, backgroundSize: 'contain' }}
-                onClick={handlePrevClick}
-            />
-        );
+        return (<div
+            className={className}
+            style={{
+                ...style,
+                display: 'block',
+                background: `url(${leftArrow}) no-repeat center center`,
+                backgroundSize: 'contain'
+            }}
+            onClick={handlePrevClick}
+        />);
     }
 
-    // const [selectedStack, setSelectedStack] = useState(null);
-    //
-    // const changeStack = (newStack) => {
-    //     setSelectedStack(newStack); // Set the selected stack in the state
-    //     props.changeStack(newStack); // Pass the selected stack to the parent component
-    // };
+    function getSelectedStackData() {
+        const selectedStackName = availableStacks[selectedStackIndex];
+        let items = [];
+        props.stacks[selectedStackName].forEach((stackField) => {
+            items.push(<div className="img-wrapper" key={stackField.name}>
+                <img
+                    className="result-item"
+                    src={stackField.icon}
+                    title={stackField.name}
+                    alt={stackField.name}
+                />
+            </div>)
+        })
+        return items
+    }
 
     const settings = {
         dots: true,
@@ -92,19 +104,21 @@ function SimpleSlider(props) {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow changeStack={changeStack}  />,
-        prevArrow: <SamplePrevArrow changeStack={changeStack}  />
+        nextArrow: <SampleNextArrow changeStack={changeStack}/>,
+        prevArrow: <SamplePrevArrow changeStack={changeStack}/>
     };
 
-    return (
+    return (<>
         <div className="simple-slider">
             <Slider {...settings} className='slid'>
                 {elements}
-
             </Slider>
-            {/* Add any additional content or customization as needed */}
         </div>
-    );
+        <hr/>
+        <div className="card-result">
+            {getSelectedStackData()}
+        </div>
+    </>);
 }
 
 export default SimpleSlider;

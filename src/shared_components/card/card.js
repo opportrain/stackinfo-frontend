@@ -4,41 +4,6 @@ import defaultCardLogo from '../../assets/default_card_logo.png'
 import SimpleSlider from "../slider/slider";
 
 function Card (props) {
-    const stacks=props.stacks
-    const availableStacks= stacks.available_stacks
-    const [selectedStack, setSelectedStack]=useState(availableStacks[0])
-    const [SelectedIcons ,setIcons]=useState([])
-
-    const changeStack = (newStack) => {
-        setSelectedStack(newStack);
-        chnageIcons();
-    }
-    const chnageIcons = () => {
-        const stack = props.stacks[selectedStack];
-        if (stack) {
-            setIcons(
-                stack.map((stackfield) => {
-                    return (
-                        <div className="img-wraper" key={stackfield.name}>
-                            <img
-                                className="result-item"
-                                src={stackfield.icon}
-                                title={stackfield.name}
-                                alt={stackfield.name}
-                            />
-                        </div>
-                    );
-                })
-            );
-        } else {
-            console.error(`Stack "${selectedStack}" is not available.`);
-        }
-    };
-
-    useEffect(() => {
-        chnageIcons(selectedStack);
-    }, [selectedStack]);
-
         return (
             <div className="card">
                     <div className="head">
@@ -51,14 +16,9 @@ function Card (props) {
         <hr/>
         <div className="card-body">
                 <SimpleSlider
-                    availableStacks={availableStacks}
-                    changeStack={changeStack}
+                    stacks={props.stacks}
                 />
         </div>
-        <hr/>
-            <div className="card-result">
-                    {SelectedIcons}
-            </div>
     </div>
 );
 }

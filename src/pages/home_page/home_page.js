@@ -78,8 +78,8 @@ function HomePage() {
         <div className="page-body">
             <div className='selected-filters-container'>
                 <div className="selected-filters">{selectedFilters.map((filter) => (
-                    <div className="filter-tag" key={filter}>
-                        <div>{filter}</div>
+                    <div className="filter-tag" key={filter.filterName}>
+                        <div>{filter.filterName}</div>
                         <button className="remove-filter-btn" onClick={() => {
                             dispatch(removeFilter(filter))
                         }}>
@@ -99,9 +99,6 @@ function HomePage() {
             </div>
         </div>
         {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
-{/*
-        <Footer/>
-*/}
     </div>)
 }
 export default HomePage;
