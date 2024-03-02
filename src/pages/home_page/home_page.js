@@ -66,7 +66,7 @@ function HomePage() {
             <div className="feedback-message">
                 <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and
                 suggestions by giving us <span onClick={openModal}
-                                               className='text-blue-600 feedback-click'>feedback</span>.
+                                               className='feedback-click'>feedback</span>.
             </div>
             <button className="filter-button" onClick={() => {
                 setIsFiltersShowed(!isFiltersShowed);
@@ -78,8 +78,8 @@ function HomePage() {
         <div className="page-body">
             <div className='selected-filters-container'>
                 <div className="selected-filters">{selectedFilters.map((filter) => (
-                    <div className="filter-tag" key={filter}>
-                        <div>{filter}</div>
+                    <div className="filter-tag" key={filter.filterName}>
+                        <div>{filter.filterName}</div>
                         <button className="remove-filter-btn" onClick={() => {
                             dispatch(removeFilter(filter))
                         }}>
@@ -99,7 +99,6 @@ function HomePage() {
             </div>
         </div>
         {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
-        <Footer/>
     </div>)
 }
 export default HomePage;

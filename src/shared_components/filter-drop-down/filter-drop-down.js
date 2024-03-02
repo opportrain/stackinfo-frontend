@@ -4,88 +4,106 @@ import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {useDispatch, useSelector} from "react-redux";
-import {addFilter, removeFilter} from "../../features/filtering/filterSlice";
+import {addFilter, removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 
-function FilterDropDown ({title, options}) {
-    let allOptions = options;
-/*
-    const [allOptions, setAllOptions] = useState(options);
-*/
-/*    useEffect(() => {
+function FilterDropDown({title, options}) {
+    const [allOptions, setAllOptions] = useState([]);
+    useEffect(() => {
         const updatedOptions = options.map(option => ({
             filterName: option,
             filterStack: title
         }));
         setAllOptions(updatedOptions)
-    }, []);*/
+    }, []);
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const dispatch = useDispatch();
     const [isDropDownOpened, setIsDropDownOpened] = useState(false);
+    const [isIndeterminate, setIsIndeterminate] = useState(false);
+    const [isAllChecked, setIsAllChecked] = useState(false);
     const [checkedOptionsLocalArr, setCheckedOptionsLocalArr] = useState([]);
-    function getOptionList(){
+
+    function getOptionList() {
         let optionsList = [];
         for (let x = 0; x < allOptions.length; x++) {
             optionsList.push(
-                <div title={title} key={allOptions[x]} className="filter-option">
+                <div key={allOptions[x].filterName} className="filter-option">
                     <Checkbox
-                        checked={checkIfOptionChecked(allOptions[x])}
+                        checked={checkIfOptionChecked(allOptions[x].filterName)}
                         onChange={optionChecked}
-                        name={allOptions[x]}
-                        id={allOptions[x]}/>
-                    <label htmlFor={allOptions[x]}>{allOptions[x]}</label>
+                        name={title}
+                        id={allOptions[x].filterName}/>
+                    <label htmlFor={allOptions[x].filterName}>{allOptions[x].filterName}</label>
                 </div>
             )
         }
         return optionsList;
     }
+
     function optionChecked(e) {
         setCheckedOptionsLocalArr(prevOptions => {
             if (e.target.checked) {
-/*                let filterData = {
-                    filterName: e.target.name,
-                    filterStack: e.target.title
-                }*/
-                dispatch(addFilter(e.target.name));
-                return [...prevOptions, e.target.name];
+                let filterData = {
+                    filterName: e.target.id,
+                    filterStack: e.target.name
+                }
+                dispatch(addFilter(filterData));
+                return [...prevOptions, filterData];
             } else {
-/*                let filterData = {
-                    filterName: e.target.name,
-                    filterStack: e.target.title
-                }*/
-                dispatch(removeFilter(e.target.name));
-                return prevOptions.filter(option => option !== e.target.name);
+                dispatch(removeFilter(e.target.id));
+                return prevOptions.filter(option => option.filterName !== e.target.id);
             }
         });
     }
-    function checkAllOptions(e){
-        if(e.target.checked){
-            setCheckedOptionsLocalArr(allOptions);
-            allOptions.forEach((option)=> dispatch(addFilter(option)))
-        }
-        else{
+
+    function checkAllOptions(e) {
+        if (isAllChecked || isIndeterminate) {
             setCheckedOptionsLocalArr([]);
-            allOptions.forEach((option)=> dispatch(removeFilter(option)))
+            dispatch(resetFilters())
+        } else {
+            setCheckedOptionsLocalArr(allOptions);
+            allOptions.forEach((option) => {
+                dispatch(addFilter(option))
+            })
         }
     }
+
     function checkIfOptionChecked(option) {
-        return selectedFilters.some((opt) => opt === option);
+        return selectedFilters.some((opt) => opt.filterName === option);
     }
-    function checkIfAllOptionsChecked(){
-        return allOptions.every(element => selectedFilters.includes(element));
+
+    function checkIfAllOptionsChecked() {
+        if (checkedOptionsLocalArr.length === 0) {
+            setIsAllChecked(false)
+        } else setIsAllChecked(allOptions.length === checkedOptionsLocalArr.length);
     }
+
+    function checkIfIndeterminate() {
+        if (checkedOptionsLocalArr.length > 0 && checkedOptionsLocalArr.length < allOptions.length) {
+            setIsIndeterminate(true)
+        } else setIsIndeterminate(false)
+    }
+
+    useEffect(() => {
+        checkIfIndeterminate()
+        checkIfAllOptionsChecked()
+    }, [checkedOptionsLocalArr, selectedFilters]);
     return (
         <div className="dropdown">
             <div className="dropdown-title">
                 <div>
                     <Checkbox
-                        checked={checkIfAllOptionsChecked()}
-                        indeterminate={checkedOptionsLocalArr.length > 0 &&  checkedOptionsLocalArr.length !== allOptions.length}
+                        checked={isAllChecked}
+                        indeterminate={isIndeterminate}
                         onChange={checkAllOptions}/>
-                <span onClick={()=>{setIsDropDownOpened(!isDropDownOpened);}}>
+                    <span onClick={() => {
+                        setIsDropDownOpened(!isDropDownOpened);
+                    }}>
                     {title}
                 </span>
                 </div>
-                <div onClick={()=>{setIsDropDownOpened(!isDropDownOpened);}}>{isDropDownOpened ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}</div>
+                <div onClick={() => {
+                    setIsDropDownOpened(!isDropDownOpened);
+                }}>{isDropDownOpened ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}</div>
             </div>
             {isDropDownOpened ? <div className={'options-list'}>{getOptionList()}</div> : null}
         </div>

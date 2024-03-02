@@ -11,9 +11,18 @@ export async function searchByToken(token){
     })
 }
 export async function searchAndFilter(token, filters){
+    let formattedFilters = {};
+    filters.selectedFilters.forEach((filter) => {
+        const stack = `stacks.${filter.filterStack.toLowerCase()}`;
+        if (formattedFilters[stack]) {
+            formattedFilters[stack].push(filter.filterName);
+        } else {
+            formattedFilters[stack] = [filter.filterName];
+        }
+    });
     let data =   {
         "token": token,
-        "filters": filters
+        "filters": formattedFilters
     }
     const requestBody = {
         method: 'POST',
