@@ -55,7 +55,6 @@ function FilterDropDown({title, options}) {
             dispatch(resetFilters())
         } else {
             allOptions.forEach((option) => {
-                console.log('op', option)
                 dispatch(addFilter(option))
             })
         }

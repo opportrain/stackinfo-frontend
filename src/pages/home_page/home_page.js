@@ -50,7 +50,6 @@ function HomePage() {
     }
     const renderSelectedFilters = () => {
         let tags = []
-        console.log(selectedFilters)
         for (let key in selectedFilters) {
             selectedFilters[key].map((filter) => (
                 tags.push(<div className="filter-tag" key={filter}>
