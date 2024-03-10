@@ -1,22 +1,33 @@
 import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
-    filters: [],
+    filters: {},
     searchToken: ''
 }
 export const filterSlice = createSlice({
     name: "filters", initialState, reducers: {
         changeSearchToken: (state, action) => {
             state.searchToken = action.payload;
-        }, addFilter: (state, action) => {
-            if (!state.filters.some((filter) => filter.filterName === action.payload.filterName)) {
-                state.filters = [...state.filters, action.payload];
+        },
+        addFilter: (state, action) => {
+            let key = action.payload.filterStack.toLowerCase();
+            if(state.filters[key]){
+                if (!state.filters[key].some((filter) => filter === action.payload.filterName)) {
+                    state.filters[key] = [...state.filters[key], action.payload.filterName];
+                }
+            } else {
+                state.filters[key] = [action.payload.filterName];
             }
-        }, removeFilter: (state, action) => {
-            state.filters = state.filters.filter((el) => {
-                return el.filterName !== action.payload;
-            })
-        }, resetFilters: (state) => {
-            state.filters = [];
+        },
+        removeFilter: (state, action) => {
+            let key = action.payload.filterStack.toLowerCase();
+            if(state.filters[key]){
+                state.filters[key] = state.filters[key].filter((filter)=>{
+                    return filter !== action.payload.filterName;
+                })
+            }
+        },
+        resetFilters: (state) => {
+            state.filters = {};
         }
     }
 })

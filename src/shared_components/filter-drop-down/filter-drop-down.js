@@ -11,16 +11,15 @@ function FilterDropDown({title, options}) {
     useEffect(() => {
         const updatedOptions = options.map(option => ({
             filterName: option,
-            filterStack: title
+            filterStack: `stacks.${title.toLowerCase()}`
         }));
         setAllOptions(updatedOptions)
     }, []);
-    const selectedFilters = useSelector((state) => state.filtering.filters);
+    const selectedFilters = useSelector((state) => state.filtering.filters[`stacks.${title.toLowerCase()}`]);
     const dispatch = useDispatch();
     const [isDropDownOpened, setIsDropDownOpened] = useState(false);
     const [isIndeterminate, setIsIndeterminate] = useState(false);
     const [isAllChecked, setIsAllChecked] = useState(false);
-    const [checkedOptionsLocalArr, setCheckedOptionsLocalArr] = useState([]);
 
     function getOptionList() {
         let optionsList = [];
@@ -30,7 +29,7 @@ function FilterDropDown({title, options}) {
                     <Checkbox
                         checked={checkIfOptionChecked(allOptions[x].filterName)}
                         onChange={optionChecked}
-                        name={title}
+                        name={title.toLowerCase()}
                         id={allOptions[x].filterName}/>
                     <label htmlFor={allOptions[x].filterName}>{allOptions[x].filterName}</label>
                 </div>
@@ -40,27 +39,21 @@ function FilterDropDown({title, options}) {
     }
 
     function optionChecked(e) {
-        setCheckedOptionsLocalArr(prevOptions => {
-            if (e.target.checked) {
-                let filterData = {
-                    filterName: e.target.id,
-                    filterStack: e.target.name
-                }
-                dispatch(addFilter(filterData));
-                return [...prevOptions, filterData];
-            } else {
-                dispatch(removeFilter(e.target.id));
-                return prevOptions.filter(option => option.filterName !== e.target.id);
-            }
-        });
+        let filterData = {
+            filterName: e.target.id,
+            filterStack: `stacks.${e.target.name}`
+        }
+        if (e.target.checked) {
+            dispatch(addFilter(filterData));
+        } else {
+            dispatch(removeFilter(filterData));
+        }
     }
 
-    function checkAllOptions(e) {
+    function checkAllOptions() {
         if (isAllChecked || isIndeterminate) {
-            setCheckedOptionsLocalArr([]);
             dispatch(resetFilters())
         } else {
-            setCheckedOptionsLocalArr(allOptions);
             allOptions.forEach((option) => {
                 dispatch(addFilter(option))
             })
@@ -68,17 +61,18 @@ function FilterDropDown({title, options}) {
     }
 
     function checkIfOptionChecked(option) {
-        return selectedFilters.some((opt) => opt.filterName === option);
+        if(!selectedFilters) return false;
+        return selectedFilters?.some((opt) => opt === option);
     }
 
     function checkIfAllOptionsChecked() {
-        if (checkedOptionsLocalArr.length === 0) {
+        if (!selectedFilters) {
             setIsAllChecked(false)
-        } else setIsAllChecked(allOptions.length === checkedOptionsLocalArr.length);
+        } else setIsAllChecked(allOptions?.length === selectedFilters?.length);
     }
 
     function checkIfIndeterminate() {
-        if (checkedOptionsLocalArr.length > 0 && checkedOptionsLocalArr.length < allOptions.length) {
+        if (selectedFilters?.length > 0 && selectedFilters?.length < allOptions.length) {
             setIsIndeterminate(true)
         } else setIsIndeterminate(false)
     }
@@ -86,7 +80,7 @@ function FilterDropDown({title, options}) {
     useEffect(() => {
         checkIfIndeterminate()
         checkIfAllOptionsChecked()
-    }, [checkedOptionsLocalArr, selectedFilters]);
+    }, [selectedFilters]);
     return (
         <div className="dropdown">
             <div className="dropdown-title">
