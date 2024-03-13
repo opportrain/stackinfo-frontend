@@ -15,7 +15,7 @@ import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 import {searchAndFilter} from "../../services/filtering";
 import CircularProgress from '@mui/material/CircularProgress';
 
-function HomePage() {
+function HomePage(props ) {
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const searchToken = useSelector((state) => state.filtering.searchToken);
     const dispatch = useDispatch();
@@ -40,6 +40,7 @@ function HomePage() {
         />)))
         return res;
     }
+
     const renderCards = () => {
         if (!cardsData && !isLoading) {
             return <NotFound/>
@@ -53,6 +54,7 @@ function HomePage() {
         setIsLoading(true);
         searchAndFilter(searchToken, {selectedFilters}).then(res => {
             setCardsData(res.results);
+            props.setResults(res.results);
         }).then(() => {
             setIsLoading(false);
         });

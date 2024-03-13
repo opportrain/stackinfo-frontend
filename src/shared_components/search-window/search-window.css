@@ -1,0 +1,104 @@
+.search-window-overlay {
+    position: fixed;
+    top: 4em; /* Adjust this value to the height of your navbar */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 4em); /* Adjust this value to the height of your navbar */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure this is above all page content */
+}
+
+.search-window {
+    position: fixed;
+    top: 4em; /* This positions the top of the search window right below the navbar */
+    /*left: 50%; !* Center horizontally *!*/
+    /*transform: translateX(-50%); !* Center horizontally *!*/
+    /*max-width: 600px; !* Or any max-width you prefer *!*/
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    /*width: 30%;*/
+    /*position: relative;*/
+    /*right: 170px;*/
+}
+
+
+.text {
+    font-size: 10px; /* Replace with the actual font size from your design */
+    color: #6D6D6D; /* Replace with the actual text color from your design */
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.categories {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-button {
+    background-color: #91C8E4;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.category-button:hover {
+    background-color: #ddd;
+}
+
+.last-search-and-results {
+    border-top: 1px solid #eaeaea;   padding-top: 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.wraper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+.item-left{
+    position: relative;
+    top:5px;
+}
+.item:last-child {
+    margin-bottom: 0;
+}
+
+.remove-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #6D6D6D;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.remove-button:hover {
+    text-decoration: none;
+}
+.item-text{
+    color: #2D2D2D;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+}
+.history-icon{
+    /*width: 14px;*/
+    height: 14px;
+    margin-right: 4px;
+}
