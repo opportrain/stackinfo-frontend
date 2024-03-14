@@ -6,9 +6,7 @@ import Heart from '../../assets/Heart.svg';
 import Filter from '../../assets/Filter.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import Card from "../../shared_components/card/card";
-import Footer from "../../shared_components/footer/footer";
 import NotFound from "../../shared_components/not-found/not-found";
-import Searching from "../../shared_components/searching/searching";
 import FiltersListContainer from "../../shared_components/filters-list-container/filters-list-container";
 import FeedbackModal from "../../shared_components/feedback-modal/feedback-modal";
 import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
@@ -23,6 +21,7 @@ function HomePage(props ) {
     const [isFiltersShowed, setIsFiltersShowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [cardsData, setCardsData] = useState([])
+    const [selectedFiltersTags, setSelectedFiltersTags] = useState([])
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -50,14 +49,42 @@ function HomePage(props ) {
             return getCardsElements();
         }
     }
+    const renderSelectedFilters = () => {
+        let tags = []
+        for (let key in selectedFilters) {
+            selectedFilters[key].map((filter) => (
+                tags.push(<div className="filter-tag" key={filter}>
+                    <div>{filter}</div>
+                    <button className="remove-filter-btn" onClick={() => {
+                        dispatch(removeFilter({
+                            filterName: filter,
+                            filterStack: key
+                        }))
+                    }}>
+                        <CloseIcon style={{fontSize: 14}}/>
+                    </button>
+                </div>)))
+        }
+        setSelectedFiltersTags(tags)
+    }
+
+    let selectedFiltersContainer = <div className='selected-filters-container'>
+        <div className="selected-filters">{selectedFiltersTags}</div>
+        <button className='clear-all-btn' onClick={() => {
+            dispatch(resetFilters())
+        }}>Clear All
+        </button>
+    </div>
+
     useEffect(() => {
         setIsLoading(true);
-        searchAndFilter(searchToken, {selectedFilters}).then(res => {
+        searchAndFilter(searchToken, selectedFilters).then(res => {
             setCardsData(res.results);
             props.setResults(res.results);
         }).then(() => {
             setIsLoading(false);
         });
+        renderSelectedFilters()
     }, [searchToken, selectedFilters]);
     return (<div className="page-wrapper">
         <div className="header">
@@ -78,21 +105,7 @@ function HomePage(props ) {
             </button>
         </div>
         <div className="page-body">
-            <div className='selected-filters-container'>
-                <div className="selected-filters">{selectedFilters.map((filter) => (
-                    <div className="filter-tag" key={filter.filterName}>
-                        <div>{filter.filterName}</div>
-                        <button className="remove-filter-btn" onClick={() => {
-                            dispatch(removeFilter(filter))
-                        }}>
-                            <CloseIcon style={{fontSize: 14}}/>
-                        </button>
-                    </div>))}
-                </div>
-                {selectedFilters.length > 0 ? <button className='clear-all-btn' onClick={() => {
-                    dispatch(resetFilters())
-                }}>Clear All</button> : null}
-            </div>
+            {selectedFiltersTags.length > 0 ? selectedFiltersContainer : <br/>}
             <div className="main-container">
                 <div className="card-container">
                     {renderCards()}
@@ -103,4 +116,5 @@ function HomePage(props ) {
         {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
     </div>)
 }
+
 export default HomePage;
