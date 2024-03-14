@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './slider.css';
-import rightArrow from '../../assets/card/card-body/right_arrow.svg';
-import leftArrow from '../../assets/card/card-body/left_arrow.svg';
+import rightArrow from '../../assets/card/right_arrow.svg';
+import leftArrow from '../../assets/card/left_arrow.svg';
 
 const stacksMap = {
     'dba': 'DBA',
