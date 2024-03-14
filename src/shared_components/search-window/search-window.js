@@ -107,9 +107,6 @@ const SearchWindow = ({ width, closeModal, results ,historyFlag, lastSearches, s
                                         </div>
                                     </div>
                                 </button>
-                                <button onClick={() => removeSearch(search)} className="remove-button">
-                                    Remove
-                                </button>
                             </div>
                         ))}
                     </div>
