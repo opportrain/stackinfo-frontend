@@ -83,21 +83,47 @@ position: absolute;
     height: 100%;
 }
 
-.purple{
-    background-color: rgba(204, 212, 255, 0.35);
+/* CSS classes corresponding to keywordColorMap colors */
+.frontend {
+    background-color: rgba(143, 45, 86, 0.35);
 }
-.red{
-    background-color: rgba(255, 158, 158, 0.21);
+
+.backend {
+    background-color: rgba(0, 107, 166, 0.35);
 }
-.blue{
-    background-color: rgba(162,210,255,0.35);
+
+.dba {
+    background-color: rgba(4, 150, 255, 0.35);
 }
-.pink{
-    background-color: rgba(255, 171, 198, 0.35);
+
+.data_analytics {
+    background-color: rgba(255, 188, 66, 0.35);
 }
-.green{
-    background-color: rgba(167, 255, 161, 0.3);
+
+.devops {
+    background-color: rgba(216, 17, 89, 0.35);
 }
+
+.ml_dl {
+    background-color: rgba(60, 9, 108, 0.35);
+}
+
+.mobile {
+    background-color: rgba(211, 118, 118, 0.35);
+}
+
+.uiux {
+    background-color: rgba(56, 176, 0, 0.35);
+}
+
+.qa {
+    background-color: rgba(145, 149, 246, 0.35);
+}
+
+.defaultColor {
+    background-color: rgba(145, 149, 246, 0.35);
+}
+
 .slider-element {
     box-sizing: border-box;
     display: inline-block;

@@ -5,15 +5,15 @@ import SimpleSlider from "../slider/slider";
 
 function Card (props) {
         return (
-            <div className="card">
+            <div className="card" style={props.style} >
                     <div className="head">
                             <img className="card-logo" src={props.logo || defaultCardLogo} alt="card-logo"/>
                             <div className="card-description">
                         <div className="company-name">{props.company_name}</div>
                         <div className="company-slogan">{props.slogan}</div>
-                </div>
-        </div>
-        <hr/>
+                    </div>
+            </div>
+        <hr className="first-hr"/>
         <div className="card-body">
                 <SimpleSlider
                     stacks={props.stacks}

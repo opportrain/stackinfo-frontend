@@ -5,11 +5,13 @@ import {useDispatch} from "react-redux";
 import {changeSearchToken} from "../../features/filtering/filterSlice";
 
 const appendSearches = (newSearches, lastSearches, setLastSearches) => {
-    const updatedSearches = [...lastSearches, ...newSearches];
+    const filteredNewSearches = newSearches.filter(search => search.trim() !== "");
+
+    const updatedSearches = [...new Set([...lastSearches, ...filteredNewSearches])];
     setLastSearches(updatedSearches);
     localStorage.setItem('lastSearches', JSON.stringify(updatedSearches));
 };
-const SearchWindow = ({ width, closeModal, results ,historyFlag, lastSearches, setLastSearches, Xpostion, searchInput} ) => {
+const SearchWindow = ({ width, closeModal, results ,historyFlag, lastSearches, setLastSearches, Xpostion, searchInput, setsearchInput} ) => {
     const windowStyle = {
         left: Xpostion ? `${Xpostion }px` : '50%',
         width: width ? `${width}px` : 'auto',
@@ -18,6 +20,7 @@ const SearchWindow = ({ width, closeModal, results ,historyFlag, lastSearches, s
     const [currentSearches, setCurrentSearches] = useState([]);
     const dispatch = useDispatch();
     const applySearch = (e) => {
+        setsearchInput(e)
         dispatch(changeSearchToken(e));
         appendSearches([e], lastSearches, setLastSearches);
         closeModal()
@@ -58,58 +61,80 @@ const SearchWindow = ({ width, closeModal, results ,historyFlag, lastSearches, s
             setCurrentSearches([...new Set(newSearches)]);
         }
     }, [results, searchInput]);
-
+    const clearLastSearches = () => {
+        setLastSearches([]);
+        localStorage.removeItem('lastSearches');
+    };
+    {/*<div className="text">*/}
+    {/*    I’m Looking for...*/}
+    {/*</div>*/}
+    {/*<div className="categories">*/}
+    {/*    {categories.map((category, index) => (*/}
+    {/*        <button key={index} className="category-button">*/}
+    {/*            {category}*/}
+    {/*        </button>*/}
+    {/*    ))}*/}
+    {/*</div>*/}
     return (
-        <div className="search-window-overlay" onClick={closeModal}>
-            <div className="search-window" style={windowStyle} onClick={e => e.stopPropagation()}>
-                {/*<div className="text">*/}
-                {/*    I’m Looking for...*/}
-                {/*</div>*/}
-                {/*<div className="categories">*/}
-                {/*    {categories.map((category, index) => (*/}
-                {/*        <button key={index} className="category-button">*/}
-                {/*            {category}*/}
-                {/*        </button>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
+        <div>
+            {/*<div className="search-window-navbar-overlay" onClick={closeModal}>*/}
 
+            {/*</div>*/}
+            <div className="search-window-overlay" onClick={closeModal}>
                 {
-                    historyFlag ?
-                    <div className="last-search-and-results">
-                        <div className="text">
-                            Last Search
-                        </div>
-                        {lastSearches.slice(-12).reverse().map((search, index) => (
-                            <div className="item" key={index} >
-                                <button  className="item-text-button" onClick={() => applySearch(search)}>
-                                    <div className="wraper">
-                                        <img src={history} className="history-icon" alt="history-icon"/>
-                                        <div className="item-text">
-                                            {search}
+                    historyFlag
+                        ?
+                        lastSearches.length > 0
+                            ?
+                            <div className="search-window" style={windowStyle} onClick={e => e.stopPropagation()}>
+                                <div className="last-search-and-results">
+                                    <div className="header-last">
+                                        <div className="text">
+                                            Last Search
                                         </div>
+                                        <button className="remove-button" onClick={clearLastSearches}>
+                                            Remove All
+                                        </button>
                                     </div>
-                                </button>
-                                <button onClick={() => removeSearch(search)} className="remove-button">
-                                    Remove
-                                </button>
+                                    {lastSearches.slice(-12).reverse().map((search, index) => (
+                                        <div className="item" key={index}>
+                                            <button className="item-text-button" onClick={() => applySearch(search)}>
+                                                <div className="wraper">
+                                                    <img src={history} className="history-icon" alt="history-icon"/>
+                                                    <div className="item-text">
+                                                        {search}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                            <button onClick={() => removeSearch(search)} className="remove-button">
+                                                Remove
+                                            </button>
 
-                            </div>
-                        ))}
-                    </div>
-                        :
-                    <div className="last-search-and-results">
-                        {currentSearches.slice(0, 12).map((search, index) => (
-                            <div key={index} className="item">
-                                <button className="item-text-button" onClick={() => applySearch(search)}>
-                                    <div className="wrapper">
-                                        <div className="item-text">
-                                            {search}
                                         </div>
-                                    </div>
-                                </button>
+                                    ))}
+                                </div>
                             </div>
-                        ))}
-                    </div>
+                            : null
+                        :
+                        currentSearches.length > 0
+                            ?
+                            <div className="search-window" style={windowStyle} onClick={e => e.stopPropagation()}>
+
+                                <div className="last-search-and-results">
+                                    {currentSearches.slice(0, 12).map((search, index) => (
+                                        <div key={index} className="item">
+                                            <button className="item-text-button" onClick={() => applySearch(search)}>
+                                                <div className="wrapper">
+                                                    <div className="item-text">
+                                                        {search}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            : null
                 }
             </div>
         </div>
