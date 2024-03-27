@@ -2,11 +2,10 @@ import {React, useState, useEffect, useRef, useCallback} from 'react';
 import './navbar.css'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import AppsIcon from '@mui/icons-material/Apps';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import {useDispatch} from "react-redux";
 import {changeSearchToken} from "../../features/filtering/filterSlice";
-import {appendSearches} from "../search-window/search-window";
+import { appendSearches } from "../search-window/search-window";
 
 function Navbar(props) {
     const dispatch = useDispatch();
@@ -26,7 +25,7 @@ function Navbar(props) {
     useEffect(() => {//Update width, Xposition
         const updateDimensions = () => {
             const rect = searchBarContainerRef.current.getBoundingClientRect();
-            props.setXpostion(rect.left);
+            props.setXpostion(rect.left );
             props.setWidth(rect.width);
         };
         updateDimensions();
@@ -43,22 +42,23 @@ function Navbar(props) {
         };
     }, []);
 
-    return (<div className="navbar">
-        <div className="title">
-            <div>Stack<span className="logo-span">Info</span></div>
-        </div>
-        <div className="search-bar-container" ref={searchBarContainerRef}>
-            <SearchOutlinedIcon className="search-icon"/>
-            <input
-                onKeyPress={handlePress}
-                onClick={() => props.setSearchWindowVisible(true)}
-                onChange={applySearch}
-                className="search-bar"
-                type="text"
-                placeholder="Company, city, technology, language..."/>
-        </div>
-        <div className="actions">
-            {/*<button className="actions-button moon-icon" onClick={toggleMode}>
+    return (
+        <div className="navbar">
+            <div className="title">
+                <div>Stack<span className="logo-span">Info</span></div>
+            </div>
+            <div className="search-bar-container"  ref={searchBarContainerRef}>
+                <SearchOutlinedIcon className="search-icon"/>
+                <input
+                    onKeyPress={handlePress}
+                    onClick={() => props.setSearchWindowVisible(true)}
+                    onChange={applySearch}
+                    className="search-bar"
+                    type="text"
+                    placeholder="Company, city, technology, language..."/>
+            </div>
+            <div className="actions">
+                {/*<button className="actions-button moon-icon" onClick={toggleMode}>
                     {mode ? <NightlightRoundIcon className="icon"/> : <LightModeIcon className="icon"/>}
                 </button>*/}
             <button className="actions-button">
@@ -69,5 +69,4 @@ function Navbar(props) {
         </div>
     </div>)
 }
-
 export default Navbar;
