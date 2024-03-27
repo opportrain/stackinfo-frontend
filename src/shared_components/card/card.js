@@ -4,6 +4,7 @@ import defaultCardLogo from '../../assets/default_card_logo.png'
 import SimpleSlider from "../slider/slider";
 
 function Card (props) {
+
         return (
             <div className="card" style={props.style} >
                     <div className="head">
