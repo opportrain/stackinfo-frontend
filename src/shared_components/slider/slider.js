@@ -11,17 +11,21 @@ const stacksMap = {
     'devops': 'DevOps',
     'data_analytics': 'Data Analytics',
 }
-function SimpleSlider(props) {
-    const availableStacks = props.stacks.available_stacks.sort();
 
-    const elements = availableStacks.map((item, index) => {
-        const className = item;
+const colorsMap = {
+
+}
+
+function SimpleSlider(props) {
+    const availableStacks = props.stacks.available_stacks;
+    const elements = availableStacks.map((item) => {
+        const itemNew=item;
         if (stacksMap[item]) {
             item = stacksMap[item]
         } else {
             item = item.charAt(0).toUpperCase() + item.slice(1)
         }
-        return (<div className={`slider-element ${className}`} key={item}>
+        return (<div className={`slider-element ${itemNew}`} key={item}>
             {item}
         </div>);
     });
