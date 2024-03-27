@@ -11,25 +11,17 @@ const stacksMap = {
     'devops': 'DevOps',
     'data_analytics': 'Data Analytics',
 }
-
-const colorsMap = {
-
-}
-
 function SimpleSlider(props) {
-    // const colors = ["rgba(204, 212, 255, 0.35)", "rgba(162,210,255,0.35)", "rgba(255,200,221,0.35)"];
-    const colors = ['purple', 'red', 'blue', 'pink', 'green'];
-    const availableStacks = props.stacks.available_stacks;
+    const availableStacks = props.stacks.available_stacks.sort();
 
     const elements = availableStacks.map((item, index) => {
-        const colorIndex = index % colors.length;
-        const colorClass = colors[colorIndex];
+        const className = item;
         if (stacksMap[item]) {
             item = stacksMap[item]
         } else {
             item = item.charAt(0).toUpperCase() + item.slice(1)
         }
-        return (<div className={`slider-element ${colorClass}`} key={item}>
+        return (<div className={`slider-element ${className}`} key={item}>
             {item}
         </div>);
     });

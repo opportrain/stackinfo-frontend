@@ -83,20 +83,32 @@ position: absolute;
     height: 100%;
 }
 
-.purple{
-    background-color: rgba(204, 212, 255, 0.35);
+.backend{
+    background-color: #CCE1ED;
 }
-.red{
-    background-color: rgba(255, 158, 158, 0.21);
+.dba{
+    background-color: #CDEAFF;
 }
-.blue{
-    background-color: rgba(162,210,255,0.35);
+.data-analytics{
+    background-color: #FFF2D9;
 }
-.pink{
-    background-color: rgba(255, 171, 198, 0.35);
+.devops{
+    background-color: #F7CFDE;
 }
-.green{
-    background-color: rgba(167, 255, 161, 0.3);
+.frontend{
+    background-color: #E9D5DD;
+}
+.ml-dl{
+    background-color: #D8CEE2;
+}
+.mobile{
+    background-color: #F6E4E4;
+}
+.qa{
+    background-color: #E9EAFD;
+}
+.uiux{
+    background-color: #D7EFCC;
 }
 .slider-element {
     box-sizing: border-box;
@@ -105,7 +117,7 @@ position: absolute;
     text-align: center;
     /*background-color: rgba(204, 212, 255, 0.35);*/
     height: 32px;
-    max-width: fit-content;
+    width: 122px !important;
     border-radius: 8px;
     padding: 0 1em;
     margin: 0;
