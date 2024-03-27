@@ -60,7 +60,8 @@
     outline: none !important;
 }
 .actions{
-    padding: 8px;
+    display: flex;
+    align-items: center;
     min-width: fit-content;
 }
 .search-icon{
