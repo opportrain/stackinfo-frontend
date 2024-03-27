@@ -83,33 +83,47 @@ position: absolute;
     height: 100%;
 }
 
-.backend{
-    background-color: #CCE1ED;
+/* CSS classes corresponding to keywordColorMap colors */
+.frontend {
+    background-color: rgba(143, 45, 86, 0.2);
 }
-.dba{
-    background-color: #CDEAFF;
+
+.backend {
+    background-color: rgba(0, 107, 166, 0.2);
 }
-.data-analytics{
-    background-color: #FFF2D9;
+
+.dba {
+    background-color: rgba(4, 150, 255, 0.2);
 }
-.devops{
-    background-color: #F7CFDE;
+
+.data_analytics {
+    background-color: rgba(255, 188, 66, 0.2);
 }
-.frontend{
-    background-color: #E9D5DD;
+
+.devops {
+    background-color: rgba(216, 17, 89, 0.2);
 }
-.ml-dl{
-    background-color: #D8CEE2;
+
+.ml_dl {
+    background-color: rgba(60, 9, 108, 0.2);
 }
-.mobile{
-    background-color: #F6E4E4;
+
+.mobile {
+    background-color: rgba(211, 118, 118, 0.2);
 }
-.qa{
-    background-color: #E9EAFD;
+
+.uiux {
+    background-color: rgba(56, 176, 0, 0.2);
 }
-.uiux{
-    background-color: #D7EFCC;
+
+.qa {
+    background-color: rgba(145, 149, 246, 0.2);
 }
+
+.defaultColor {
+    background-color: rgba(145, 149, 246, 0.2);
+}
+
 .slider-element {
     box-sizing: border-box;
     display: inline-block;
@@ -117,7 +131,7 @@ position: absolute;
     text-align: center;
     /*background-color: rgba(204, 212, 255, 0.35);*/
     height: 32px;
-    width: 122px !important;
+    max-width: fit-content;
     border-radius: 8px;
     padding: 0 1em;
     margin: 0;

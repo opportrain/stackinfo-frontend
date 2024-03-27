@@ -16,14 +16,15 @@ function App() {
     const [searchInput,setsearchInput]=useState("")
 
     const toggleSearchWindow = (width) => {
-        setSearchWindowVisible(!isSearchWindowVisible);
         setHistoryFlag(!historyFlag);
     };
 
     return (
     <div className="App">
         <Navbar
+            isSearchWindowVisible={isSearchWindowVisible}
             setsearchInput={setsearchInput}
+            searchInput={searchInput}
             setXpostion={setXposition}
             setWidth={setWidth}
             toggleSearchWindow={toggleSearchWindow}
@@ -43,6 +44,7 @@ function App() {
             setLastSearches={setLastSearches}
             Xpostion={Xposition}
             searchInput={searchInput}
+            setsearchInput={setsearchInput}
             />
         }
         <Router>

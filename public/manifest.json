@@ -1,9 +1,24 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "StackInfo",
+  "name": "StackInfo",
   "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "900x1160",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ],
-  "start_url": ".",
+  "start_url": "https://stackinfo.info/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

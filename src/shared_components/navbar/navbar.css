@@ -6,7 +6,7 @@
     z-index: 100;
     align-items: center;
     padding: 13px 25px 13px 25px;
-    height: 4em;
+    height: 64px;
     min-width: fit-content;
     box-shadow: 0 0 15px #e0e0e1;
     justify-content: space-between;
@@ -40,6 +40,7 @@
     background-color: #F1F1F1;
     border-radius: 8px;
     position: relative;
+    z-index: 1001 !important;
     /*right: 170px;*/
 }
 .search-bar{
@@ -55,9 +56,12 @@
     background-color: #F1F1F1;
     color: #666666;
     font-size: 0.8em;
+    z-index: 1001 !important;
 }
 .search-bar:focus{
     outline: none !important;
+    z-index: 1001 !important;
+
 }
 .actions{
     display: flex;
@@ -67,6 +71,8 @@
 .search-icon{
     color: #666666;
     margin: 8px;
+    z-index: 1001 !important;
+
 }
 .actions-button{
     background-color: transparent;

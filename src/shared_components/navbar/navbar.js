@@ -18,11 +18,23 @@ function Navbar(props) {
     }
     const handlePress = (event) => {
         if (event.key === 'Enter') {
-            props.toggleSearchWindow();
-            appendSearches([event.target.value], props.lastSearches, props.setLastSearches);
+            props.setSearchWindowVisible(false)
+            if (event.target.value.trim())//not empty
+            {
+                props.toggleSearchWindow();
+                appendSearches([event.target.value], props.lastSearches, props.setLastSearches);
+
+            }
         }
     };
-    useEffect(() => {//Update width, Xposition
+
+    const handelNavbarClick = () => {
+        if(props.isSearchWindowVisible ){
+            props.setSearchWindowVisible(false)
+        }
+
+    };
+    useEffect(() => {
         const updateDimensions = () => {
             const rect = searchBarContainerRef.current.getBoundingClientRect();
             props.setXpostion(rect.left );
@@ -43,11 +55,11 @@ function Navbar(props) {
     }, []);
 
     return (
-        <div className="navbar">
+        <div className="navbar" onClick={handelNavbarClick}>
             <div className="title">
                 <div>Stack<span className="logo-span">Info</span></div>
             </div>
-            <div className="search-bar-container"  ref={searchBarContainerRef}>
+            <div className="search-bar-container"  ref={searchBarContainerRef} onClick={(e) => e.stopPropagation()}>
                 <SearchOutlinedIcon className="search-icon"/>
                 <input
                     onKeyPress={handlePress}
@@ -55,7 +67,9 @@ function Navbar(props) {
                     onChange={applySearch}
                     className="search-bar"
                     type="text"
-                    placeholder="Company, city, technology, language..."/>
+                    placeholder="Company, city, technology, language..."
+                    value={props.searchInput}
+                />
             </div>
             <div className="actions">
                 {/*<button className="actions-button moon-icon" onClick={toggleMode}>

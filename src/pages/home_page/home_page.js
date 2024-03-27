@@ -22,6 +22,7 @@ function HomePage(props ) {
     const [isLoading, setIsLoading] = useState(false);
     const [cardsData, setCardsData] = useState([])
     const [selectedFiltersTags, setSelectedFiltersTags] = useState([])
+    const [cardWidth, setCardWidth] = useState('initial');
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -33,6 +34,7 @@ function HomePage(props ) {
         let res = [];
         cardsData?.map(cardData => (res.push(<Card
             key={cardData.company_name}
+            style={{ width: cardWidth }}
             company_name={cardData.company_name}
             slogan={cardData.city}
             stacks={cardData.stacks}
@@ -86,6 +88,27 @@ function HomePage(props ) {
         });
         renderSelectedFilters()
     }, [searchToken, selectedFilters]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const containerWidth = document.querySelector('.card-container').offsetWidth;
+            const baseCardWidth = 325;
+            const margin =11;
+            const n = Math.floor(containerWidth / (baseCardWidth + margin * 2));
+            const remainingSpace = containerWidth - n * (baseCardWidth + margin * 2);
+            if (remainingSpace < 200) {
+                setCardWidth(`${(containerWidth / n) - (margin * 2)+2}px`);
+            } else {
+                const newN = n + 1;
+                setCardWidth(`${(containerWidth / newN) - (margin * 2)+2}px`);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (<div className="page-wrapper">
         <div className="header">
             <img src={Heart} alt="Heart Icon"/>
@@ -107,7 +130,7 @@ function HomePage(props ) {
         <div className="page-body">
             {selectedFiltersTags.length > 0 ? selectedFiltersContainer : <br/>}
             <div className="main-container">
-                <div className="card-container">
+                <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {renderCards()}
                 </div>
                 {isFiltersShowed ? <FiltersListContainer/> : null}
