@@ -1,8 +1,7 @@
-import {React, useState, useEffect, useRef, useCallback } from 'react';
+import {React, useState, useEffect, useRef, useCallback} from 'react';
 import './navbar.css'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import AppsIcon from '@mui/icons-material/Apps';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import {useDispatch} from "react-redux";
 import {changeSearchToken} from "../../features/filtering/filterSlice";
@@ -76,11 +75,12 @@ function Navbar(props) {
                 {/*<button className="actions-button moon-icon" onClick={toggleMode}>
                     {mode ? <NightlightRoundIcon className="icon"/> : <LightModeIcon className="icon"/>}
                 </button>*/}
-                <button className="actions-button">
-                    <AppsIcon className="icon"/>
-                </button>
-            </div>
+            <button className="actions-button">
+                <span className="material-symbols-outlined icon">
+                    apps
+                </span>
+            </button>
         </div>
-    )
+    </div>)
 }
 export default Navbar;
