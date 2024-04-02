@@ -12,7 +12,8 @@
     top: 64px;
     left: 0;
     width: 100%;
-    height: calc(100% - 4em);
+    height: 200%;
+    /*height: calc(100% - 4em);*/
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
@@ -42,10 +43,11 @@
     align-items: baseline;
 }
 .text {
-    font-size: 10px;
+    font-size:12px;
     color: #6D6D6D;
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: 500;
+    line-height: 18px;
 }
 
 .categories {

@@ -12,6 +12,7 @@ import FeedbackModal from "../../shared_components/feedback-modal/feedback-modal
 import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 import {searchAndFilter} from "../../services/filtering";
 import CircularProgress from '@mui/material/CircularProgress';
+import Footer from "../../shared_components/footer/footer";
 
 function HomePage(props ) {
     const selectedFilters = useSelector((state) => state.filtering.filters);
@@ -137,7 +138,9 @@ function HomePage(props ) {
             </div>
         </div>
         {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
-    </div>)
+    <Footer />
+    </div>
+    )
 }
 
 export default HomePage;

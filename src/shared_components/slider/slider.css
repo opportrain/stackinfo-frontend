@@ -131,7 +131,7 @@ position: absolute;
     text-align: center;
     /*background-color: rgba(204, 212, 255, 0.35);*/
     height: 32px;
-    max-width: fit-content;
+    max-width: 150px;
     border-radius: 8px;
     padding: 0 1em;
     margin: 0;

@@ -52,7 +52,7 @@ function App() {
                 <Route path="/" element={<HomePage setResults={setResults}  />}></Route>
             </Routes>
         </Router>
-        <Footer />
+        {/*<Footer />*/}
     </div>
   );
 }
