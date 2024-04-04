@@ -18,6 +18,8 @@ function Card (props) {
         <div className="card-body">
                 <SimpleSlider
                     stacks={props.stacks}
+                    width={props.width}
+                    searchInput={props.searchInput}
                 />
         </div>
     </div>

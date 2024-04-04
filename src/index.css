@@ -21,10 +21,13 @@ html, body, #root {
 .page-wrapper{
   height: 100vh;
   width: 100%;
-  padding: 25px;
+  /*padding: 25px;*/
   position: static;
   overflow: auto;
   background-color: #EBF1FA;
+}
+.home_page{
+  padding: 25px;
 }
 ::-webkit-scrollbar {
   width: 10px;

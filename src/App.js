@@ -14,6 +14,7 @@ function App() {
     const [width, setWidth] = useState(0);
     const [Xposition, setXposition] = useState(0);
     const [searchInput,setsearchInput]=useState("")
+    const [cardsData, setCardsData] = useState([])
 
     const toggleSearchWindow = (width) => {
         setHistoryFlag(!historyFlag);
@@ -33,6 +34,8 @@ function App() {
             setHistoryFlag={setHistoryFlag}
             lastSearches={lastSearches}
             setLastSearches={setLastSearches}
+            cardsData={cardsData}
+            setCardsData={setCardsData}
         />
         {isSearchWindowVisible &&
             <SearchWindow
@@ -45,11 +48,13 @@ function App() {
             Xpostion={Xposition}
             searchInput={searchInput}
             setsearchInput={setsearchInput}
+            cardsData={cardsData}
+            setCardsData={setCardsData}
             />
         }
         <Router>
             <Routes>
-                <Route path="/" element={<HomePage setResults={setResults}  />}></Route>
+                <Route path="/" element={<HomePage searchInput={searchInput} setResults={setResults} cardsData={cardsData} setCardsData={setCardsData} />}></Route>
             </Routes>
         </Router>
         {/*<Footer />*/}

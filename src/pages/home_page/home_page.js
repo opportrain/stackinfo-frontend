@@ -21,7 +21,7 @@ function HomePage(props ) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFiltersShowed, setIsFiltersShowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [cardsData, setCardsData] = useState([])
+    // const [cardsData, setCardsData] = useState([])
     const [selectedFiltersTags, setSelectedFiltersTags] = useState([])
     const [cardWidth, setCardWidth] = useState('initial');
 
@@ -33,18 +33,20 @@ function HomePage(props ) {
     }
     const getCardsElements = () => {
         let res = [];
-        cardsData?.map(cardData => (res.push(<Card
+            props.cardsData?.map(cardData => (res.push(<Card
             key={cardData.company_name}
             style={{ width: cardWidth }}
+            width={cardWidth}
             company_name={cardData.company_name}
             slogan={cardData.city}
             stacks={cardData.stacks}
+            searchInput={props.searchInput}
         />)))
         return res;
     }
 
     const renderCards = () => {
-        if (!cardsData && !isLoading) {
+        if (!props.cardsData && !isLoading) {
             return <NotFound/>
         } else if (isLoading) {
             return <div className="spinner-div"><CircularProgress/></div>
@@ -82,7 +84,7 @@ function HomePage(props ) {
     useEffect(() => {
         setIsLoading(true);
         searchAndFilter(searchToken, selectedFilters).then(res => {
-            setCardsData(res.results);
+            props.setCardsData(res.results);
             props.setResults(res.results);
         }).then(() => {
             setIsLoading(false);
@@ -110,36 +112,39 @@ function HomePage(props ) {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    return (<div className="page-wrapper">
-        <div className="header">
-            <img src={Heart} alt="Heart Icon"/>
-            <div>Welcome to Stack Info: <span className="sub-header">Discover, Connect, Empower</span></div>
-        </div>
-        <div className="feedback-container">
-            <div className="feedback-message">
-                <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and
-                suggestions by giving us <span onClick={openModal}
-                                               className='feedback-click'>feedback</span>.
-            </div>
-            <button className="filter-button" onClick={() => {
-                setIsFiltersShowed(!isFiltersShowed);
-            }}>
-                <img className='filter-icon' src={Filter} alt="Filter Icon"/>
-                <span>{isFiltersShowed ? 'Hide Filters' : 'Show Filters'}</span>
-            </button>
-        </div>
-        <div className="page-body">
-            {selectedFiltersTags.length > 0 ? selectedFiltersContainer : <br/>}
-            <div className="main-container">
-                <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {renderCards()}
+    return (
+        <div  className="page-wrapper">
+            <div className="home_page">
+                <div className="header">
+                    <img src={Heart} alt="Heart Icon"/>
+                    <div>Welcome to Stack Info: <span className="sub-header">Discover, Connect, Empower</span></div>
                 </div>
-                {isFiltersShowed ? <FiltersListContainer/> : null}
+                <div className="feedback-container">
+                    <div className="feedback-message">
+                        <span className="heart-emoji">💙</span> Help us enhance your experience! Share your thoughts and
+                        suggestions by giving us <span onClick={openModal}
+                                                       className='feedback-click'>feedback</span>.
+                    </div>
+                    <button className="filter-button" onClick={() => {
+                        setIsFiltersShowed(!isFiltersShowed);
+                    }}>
+                        <img className='filter-icon' src={Filter} alt="Filter Icon"/>
+                        <span>{isFiltersShowed ? 'Hide Filters' : 'Show Filters'}</span>
+                    </button>
+                </div>
+                <div className="page-body">
+                    {selectedFiltersTags.length > 0 ? selectedFiltersContainer : <br/>}
+                    <div className="main-container">
+                        <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
+                            {renderCards()}
+                        </div>
+                        {isFiltersShowed ? <FiltersListContainer/> : null}
+                    </div>
+                </div>
+                {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
             </div>
+            <Footer />
         </div>
-        {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
-    <Footer />
-    </div>
     )
 }
 

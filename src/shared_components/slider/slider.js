@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect, useRef} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -17,6 +17,62 @@ const colorsMap = {
 }
 
 function SimpleSlider(props) {
+    const [selectedStackIndex, setSelectedStackIndex] = useState(0);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const [techToStackIndexMapping, setTechToStackIndexMapping] = useState({});
+    const sliderRef = useRef(null);
+
+    const checkScrollability = () => {
+        const selectedStackName = props.stacks.available_stacks[selectedStackIndex];
+        const stackItems = props.stacks[selectedStackName] || [];
+        const totalStacksWidth = stackItems.length * 59;
+        const containerWidth = parseInt(props.width, 10) - 64;
+        setIsScrollable(containerWidth < totalStacksWidth);
+    };
+    // useEffect(() => {
+    //     if (Object.keys(techToStackIndexMapping).length > 0 && props.searchInput) {
+    //         const techName = props.searchInput.toLowerCase(); // Convert search input to lowercase
+    //         const stackIndex = techToStackIndexMapping[techName];
+    //
+    //         if (stackIndex !== undefined) {
+    //             setSelectedStackIndex(stackIndex);
+    //         }
+    //     }
+    // }, [props.stacks, props.searchInput, techToStackIndexMapping]);
+    useEffect(() => {
+        if (Object.keys(techToStackIndexMapping).length > 0 && props.searchInput) {
+            const normalizedSearchInput = props.searchInput.toLowerCase();
+            const matchingTechName = Object.keys(techToStackIndexMapping).find(techName =>
+                techName.toLowerCase().includes(normalizedSearchInput)
+            );
+            if (matchingTechName) {
+                const stackIndex = techToStackIndexMapping[matchingTechName];
+                setSelectedStackIndex(stackIndex);
+                if (sliderRef.current) {
+                    sliderRef.current.slickGoTo(stackIndex);
+                }
+            }
+        }
+    }, [props.stacks, props.searchInput, techToStackIndexMapping]);
+
+
+    useEffect(() => {
+        const mapping = {};
+        props.stacks.available_stacks.forEach((stackName, index) => {
+            props.stacks[stackName].forEach(tech => {
+                mapping[tech.name.toLowerCase()] = index;
+            });
+        });
+        setTechToStackIndexMapping(mapping);
+    }, [props.stacks]);
+
+
+    useEffect(() => {
+        checkScrollability();
+        window.addEventListener('resize', checkScrollability);
+        return () => window.removeEventListener('resize', checkScrollability);
+    }, [props.width, selectedStackIndex, props.stacks]);
+
     const availableStacks = props.stacks.available_stacks;
     const elements = availableStacks.map((item) => {
         const itemNew=item;
@@ -31,7 +87,6 @@ function SimpleSlider(props) {
     });
 
 
-    const [selectedStackIndex, setSelectedStackIndex] = useState(0);
 
     const changeStack = (direction) => {
         const stackSize = availableStacks.length;
@@ -111,18 +166,25 @@ function SimpleSlider(props) {
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow changeStack={changeStack}/>,
-        prevArrow: <SamplePrevArrow changeStack={changeStack}/>
+        prevArrow: <SamplePrevArrow changeStack={changeStack}/>,
+        afterChange: currentIndex => {
+            setSelectedStackIndex(currentIndex);
+            checkScrollability();
+        }
     };
+
 
     return (<>
         <div className="simple-slider">
-            <Slider {...settings} className='slid'>
+            <Slider ref={sliderRef} {...settings} className='slid'>
                 {elements}
             </Slider>
         </div>
         <hr/>
-        <div className="card-result">
-            {getSelectedStackData()}
+        <div className={`card-result-wrapper ${isScrollable ? 'is-scrollable' : ''}`}>
+            <div className="card-result">
+                {getSelectedStackData()}
+            </div>
         </div>
     </>);
 }

@@ -1,13 +1,13 @@
 .footer{
     position: static;
     top: 0;
+    bottom: 0;
     font-family: "Nunito", serif;
     display: flex;
     height: 323px;
     /*background: #FFF;*/
     flex-direction: column;
     box-shadow: 0 0 15px #e0e0e1;
-
     justify-content: space-around;
     align-items: center;
     align-content: center;

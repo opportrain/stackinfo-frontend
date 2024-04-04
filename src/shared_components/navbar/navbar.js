@@ -10,12 +10,53 @@ import { appendSearches } from "../search-window/search-window";
 function Navbar(props) {
     const dispatch = useDispatch();
     const searchBarContainerRef = useRef(null);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+
     const applySearch = (event) => {
         const value = event.target.value;
         props.setsearchInput(value)
         props.setHistoryFlag(value === '');
-        dispatch(changeSearchToken(value));
+        dispatch(fetchDataWithCache(value));
+        // dispatch(changeSearchToken(value));
     }
+    const CACHE_NAME = 'api-search-responses-cache';
+    const CACHE_EXPIRY_MS = 20 * 24 * 60 * 60 * 1000; //in milliseconds
+
+    const fetchDataWithCache = (searchTerm) => async (dispatch, getState) => {
+        const cacheKey = new Request(`cache_${searchTerm}`);
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(cacheKey);
+        const threshold = 20;
+        let counter = 0;
+        let shouldFetch = true;
+
+        if (cachedResponse) {
+            const cachedData = await cachedResponse.json();
+            const now = new Date().getTime();
+            counter = cachedData.counter;
+            const isExpired = now > cachedData.expiry;
+
+            if (!isExpired && counter < threshold) {
+                shouldFetch = false;
+                counter++;
+                props.setCardsData(cachedData.response);
+                const updatedCacheResponse = new Response(JSON.stringify({ ...cachedData, counter }), {
+                    headers: cachedResponse.headers
+                });
+                await cache.put(cacheKey, updatedCacheResponse);
+            }
+        }
+
+        if (shouldFetch) {
+            dispatch(changeSearchToken(searchTerm));
+            const newExpiry = new Date().getTime() + CACHE_EXPIRY_MS;
+            const cacheResponse = new Response(JSON.stringify({ response: props.cardsData, counter: 0, expiry: newExpiry }), {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            await cache.put(cacheKey, cacheResponse);
+        }
+    };
+
     const handlePress = (event) => {
         if (event.key === 'Enter') {
             props.setSearchWindowVisible(false)

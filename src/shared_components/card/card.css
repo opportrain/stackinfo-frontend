@@ -71,6 +71,10 @@ hr {
     margin: -15px 0 0 0 ;
     max-height: 10em;
 }
+.card-result-wrapper{
+    position: relative;
+    overflow: hidden;
+}
 .card-result {
     display: flex;
     justify-content: space-evenly ;
@@ -79,11 +83,35 @@ hr {
     align-content: flex-end;
     /*flex-wrap: wrap;*/
     align-items: center;
-
+    margin-top: 7%;
     overflow-y: auto;
     /*width: 88%;*/
     /*background-color: rgba(208, 208, 208, 0.2);*/
+    position: relative;
 
+}
+
+
+.card-result-wrapper.is-scrollable::before,
+.card-result-wrapper.is-scrollable::after {
+    content: "";
+    position: absolute;
+    margin-top: 7%;
+    top: 0px;
+    bottom: 0px;
+    width: 10px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.card-result-wrapper.is-scrollable::before {
+    left: 0;
+    box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, 0.24);
+}
+
+.card-result-wrapper.is-scrollable::after {
+    right: 0;
+    box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.24);
 }
 .card-result::-webkit-scrollbar {
     display: none;
