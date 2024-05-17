@@ -51,8 +51,7 @@ function HomePage(props ) {
             searchInput={searchInput}
         />)))
         return res;
-    }, [cardsData, searchInput]);
-
+    }, [cardsData, searchInput,cardWidth]);
     const renderCards = () => {
         if (!cardsData && !isLoading) {
             return <NotFound/>
@@ -104,7 +103,7 @@ function HomePage(props ) {
         const handleResize = () => {
             const containerWidth = document.querySelector('.card-container').offsetWidth;
             const baseCardWidth = 325;
-            const margin =11;
+            const margin =9;
             const n = Math.floor(containerWidth / (baseCardWidth + margin * 2));
             const remainingSpace = containerWidth - n * (baseCardWidth + margin * 2);
             if (remainingSpace < 200) {
