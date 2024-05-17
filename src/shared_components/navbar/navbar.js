@@ -1,85 +1,81 @@
-import {React, useState, useEffect, useRef, useCallback} from 'react';
+import React ,{useEffect, useRef, useContext, useCallback} from 'react';
 import './navbar.css'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import LightModeIcon from '@mui/icons-material/LightMode';
 import {useDispatch} from "react-redux";
-import {changeSearchToken} from "../../features/filtering/filterSlice";
-import { appendSearches } from "../search-window/search-window";
+import { appendSearches } from "../../services/searchHistory";
+import { AppContext } from '../../features/context';
+import {fetchDataWithCache} from '../../services/caching'
+import { debounce } from '../../services/debounce';
 
-function Navbar(props) {
+function Navbar() {
+
+    const {
+        isSearchWindowVisible,
+        setSearchWindowVisible,
+        showHistory,
+        setShowHistory,
+        lastSearches,
+        setLastSearches,
+        setWidth,
+        setXPosition,
+        searchInput,
+        setSearchInput,
+        cardsData,
+        setCardsData
+    } = useContext(AppContext);
     const dispatch = useDispatch();
     const searchBarContainerRef = useRef(null);
-    const [selectedIndex, setSelectedIndex] = useState(-1);
 
-    const applySearch = (event) => {
-        const value = event.target.value;
-        props.setsearchInput(value)
-        props.setHistoryFlag(value === '');
-        dispatch(fetchDataWithCache(value));
-        // dispatch(changeSearchToken(value));
-    }
-    const CACHE_NAME = 'api-search-responses-cache';
-    const CACHE_EXPIRY_MS = 20 * 24 * 60 * 60 * 1000; //in milliseconds
-
-    const fetchDataWithCache = (searchTerm) => async (dispatch, getState) => {
-        const cacheKey = new Request(`cache_${searchTerm}`);
-        const cache = await caches.open(CACHE_NAME);
-        const cachedResponse = await cache.match(cacheKey);
-        const threshold = 20;
-        let counter = 0;
-        let shouldFetch = true;
-
-        if (cachedResponse) {
-            const cachedData = await cachedResponse.json();
-            const now = new Date().getTime();
-            counter = cachedData.counter;
-            const isExpired = now > cachedData.expiry;
-
-            if (!isExpired && counter < threshold) {
-                shouldFetch = false;
-                counter++;
-                props.setCardsData(cachedData.response);
-                const updatedCacheResponse = new Response(JSON.stringify({ ...cachedData, counter }), {
-                    headers: cachedResponse.headers
-                });
-                await cache.put(cacheKey, updatedCacheResponse);
-            }
+    const handleNavbarClick = useCallback(() => {
+        if(isSearchWindowVisible){
+            setSearchWindowVisible(false)
         }
+    },[isSearchWindowVisible, setSearchWindowVisible]);
 
-        if (shouldFetch) {
-            dispatch(changeSearchToken(searchTerm));
-            const newExpiry = new Date().getTime() + CACHE_EXPIRY_MS;
-            const cacheResponse = new Response(JSON.stringify({ response: props.cardsData, counter: 0, expiry: newExpiry }), {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            await cache.put(cacheKey, cacheResponse);
-        }
-    };
-
-    const handlePress = (event) => {
+    const handlePress = useCallback((event) => {
         if (event.key === 'Enter') {
-            props.setSearchWindowVisible(false)
-            if (event.target.value.trim())//not empty
-            {
-                props.toggleSearchWindow();
-                appendSearches([event.target.value], props.lastSearches, props.setLastSearches);
-
+            setSearchWindowVisible(false)
+            if (event.target.value.trim()){ //not empty
+                setShowHistory(!showHistory)
+                appendSearches([event.target.value], lastSearches, setLastSearches);
             }
         }
-    };
+    },[showHistory, lastSearches, setShowHistory, setSearchWindowVisible, setLastSearches]);
 
-    const handelNavbarClick = () => {
-        if(props.isSearchWindowVisible ){
-            props.setSearchWindowVisible(false)
+
+    const debouncedFetchData = useCallback(debounce((value) => {
+        const pattern = /^[a-zA-Z\u0600-\u06FF\s,'\-+]+$/;
+        if ((pattern.test(value) || value === '') && value.length < 25) {
+            dispatch(fetchDataWithCache(value, cardsData, setCardsData));
+        } else {
+            setCardsData([]);
         }
+    }, 100), [dispatch, cardsData, setCardsData]);
 
-    };
+    const handleInputChange = useCallback((event) => {
+        const value = event.target.value;
+        setSearchInput(value);
+        setShowHistory(value === '');
+        debouncedFetchData(value);
+    }, [setSearchInput, setShowHistory, debouncedFetchData]);
+
+    const applySearch =useCallback( (event) => {
+        const value = event.target.value;
+        const pattern = /^[a-zA-Z\u0600-\u06FF\s,'\-+]+$/;
+        setSearchInput(value)
+        setShowHistory(value === '');
+        if ((pattern.test(value) || value === '') && (value.length < 25) ) {
+           dispatch(fetchDataWithCache(value,cardsData,setCardsData))
+        } else {
+            setCardsData([])
+        }
+    },[dispatch, cardsData, setCardsData, setSearchInput, setShowHistory]);
+
     useEffect(() => {
         const updateDimensions = () => {
             const rect = searchBarContainerRef.current.getBoundingClientRect();
-            props.setXpostion(rect.left );
-            props.setWidth(rect.width);
+            setXPosition(rect.left );
+            setWidth(rect.width);
         };
         updateDimensions();
         const resizeObserver = new ResizeObserver(entries => {
@@ -93,10 +89,9 @@ function Navbar(props) {
                 resizeObserver.unobserve(searchBarContainerRef.current);
             }
         };
-    }, []);
-
+    }, [setXPosition, setWidth]);
     return (
-        <div className="navbar" onClick={handelNavbarClick}>
+        <div className="navbar" onClick={handleNavbarClick}>
             <div className="title">
                 <div>Stack<span className="logo-span">Info</span></div>
             </div>
@@ -104,18 +99,15 @@ function Navbar(props) {
                 <SearchOutlinedIcon className="search-icon"/>
                 <input
                     onKeyPress={handlePress}
-                    onClick={() => props.setSearchWindowVisible(true)}
-                    onChange={applySearch}
+                    onClick={() => setSearchWindowVisible(true)}
+                    onChange={handleInputChange}
                     className="search-bar"
                     type="text"
                     placeholder="Company, city, technology, language..."
-                    value={props.searchInput}
+                    value={searchInput}
                 />
             </div>
             <div className="actions">
-                {/*<button className="actions-button moon-icon" onClick={toggleMode}>
-                    {mode ? <NightlightRoundIcon className="icon"/> : <LightModeIcon className="icon"/>}
-                </button>*/}
             <button className="actions-button">
                 <span className="material-symbols-outlined icon">
                     apps

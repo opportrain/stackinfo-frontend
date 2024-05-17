@@ -17,6 +17,7 @@ function Card (props) {
         <hr className="first-hr"/>
         <div className="card-body">
                 <SimpleSlider
+                   name= {props.company_name}
                     stacks={props.stacks}
                     width={props.width}
                     searchInput={props.searchInput}

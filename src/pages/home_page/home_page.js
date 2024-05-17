@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext, useCallback, useMemo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import './home_page.css';
 import 'simplebar/dist/simplebar.min.css';
@@ -13,15 +13,23 @@ import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 import {searchAndFilter} from "../../services/filtering";
 import CircularProgress from '@mui/material/CircularProgress';
 import Footer from "../../shared_components/footer/footer";
+import {fetchDataWithCache}  from "../../services/caching";
+import { AppContext } from '../../features/context';
 
 function HomePage(props ) {
+    const {
+        searchInput,
+        setResults,
+        cardsData,
+        setCardsData
+    } = useContext(AppContext);
+
     const selectedFilters = useSelector((state) => state.filtering.filters);
     const searchToken = useSelector((state) => state.filtering.searchToken);
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFiltersShowed, setIsFiltersShowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    // const [cardsData, setCardsData] = useState([])
     const [selectedFiltersTags, setSelectedFiltersTags] = useState([])
     const [cardWidth, setCardWidth] = useState('initial');
 
@@ -31,30 +39,29 @@ function HomePage(props ) {
     const closeModal = () => {
         setIsModalOpen(false);
     }
-    const getCardsElements = () => {
+    const getCardsElements = useCallback(() => {
         let res = [];
-            props.cardsData?.map(cardData => (res.push(<Card
+            cardsData?.map(cardData => (res.push(<Card
             key={cardData.company_name}
             style={{ width: cardWidth }}
             width={cardWidth}
             company_name={cardData.company_name}
             slogan={cardData.city}
             stacks={cardData.stacks}
-            searchInput={props.searchInput}
+            searchInput={searchInput}
         />)))
         return res;
-    }
+    }, [cardsData, searchInput]);
 
     const renderCards = () => {
-        if (!props.cardsData && !isLoading) {
+        if (!cardsData && !isLoading) {
             return <NotFound/>
         } else if (isLoading) {
             return <div className="spinner-div"><CircularProgress/></div>
-        } else {
-            return getCardsElements();
         }
-    }
-    const renderSelectedFilters = () => {
+        return getCardsElements();
+    };
+    const renderSelectedFilters = useCallback(() => {
         let tags = []
         for (let key in selectedFilters) {
             selectedFilters[key].map((filter) => (
@@ -71,7 +78,7 @@ function HomePage(props ) {
                 </div>)))
         }
         setSelectedFiltersTags(tags)
-    }
+    },[selectedFilters, dispatch]);
 
     let selectedFiltersContainer = <div className='selected-filters-container'>
         <div className="selected-filters">{selectedFiltersTags}</div>
@@ -83,14 +90,15 @@ function HomePage(props ) {
 
     useEffect(() => {
         setIsLoading(true);
+        fetchDataWithCache(searchToken,cardsData,setCardsData)
         searchAndFilter(searchToken, selectedFilters).then(res => {
-            props.setCardsData(res.results);
-            props.setResults(res.results);
+            setCardsData(res.results);
+            setResults(res.results);
         }).then(() => {
             setIsLoading(false);
         });
         renderSelectedFilters()
-    }, [searchToken, selectedFilters]);
+    }, [searchToken, selectedFilters, renderSelectedFilters]);
 
     useEffect(() => {
         const handleResize = () => {

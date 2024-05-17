@@ -21,6 +21,7 @@ function SimpleSlider(props) {
     const [isScrollable, setIsScrollable] = useState(false);
     const [techToStackIndexMapping, setTechToStackIndexMapping] = useState({});
     const sliderRef = useRef(null);
+    const searchTimeoutRef = useRef(null);
 
     const checkScrollability = () => {
         const selectedStackName = props.stacks.available_stacks[selectedStackIndex];
@@ -39,22 +40,6 @@ function SimpleSlider(props) {
     //         }
     //     }
     // }, [props.stacks, props.searchInput, techToStackIndexMapping]);
-    useEffect(() => {
-        if (Object.keys(techToStackIndexMapping).length > 0 && props.searchInput) {
-            const normalizedSearchInput = props.searchInput.toLowerCase();
-            const matchingTechName = Object.keys(techToStackIndexMapping).find(techName =>
-                techName.toLowerCase().includes(normalizedSearchInput)
-            );
-            if (matchingTechName) {
-                const stackIndex = techToStackIndexMapping[matchingTechName];
-                setSelectedStackIndex(stackIndex);
-                if (sliderRef.current) {
-                    sliderRef.current.slickGoTo(stackIndex);
-                }
-            }
-        }
-    }, [props.stacks, props.searchInput, techToStackIndexMapping]);
-
 
     useEffect(() => {
         const mapping = {};
@@ -65,6 +50,26 @@ function SimpleSlider(props) {
         });
         setTechToStackIndexMapping(mapping);
     }, [props.stacks]);
+
+    useEffect(() => {
+        if (Object.keys(techToStackIndexMapping).length > 0 && props.searchInput) {
+            const normalizedSearchInput = props.searchInput.toLowerCase();
+
+            clearTimeout(searchTimeoutRef.current);
+            searchTimeoutRef.current = setTimeout(() => {
+                const matchingTechName = Object.keys(techToStackIndexMapping).find(techName =>
+                    techName.toLowerCase().includes(normalizedSearchInput)
+                );
+                if (matchingTechName !== undefined) {
+                    const stackIndex = techToStackIndexMapping[matchingTechName];
+                    setSelectedStackIndex(stackIndex);
+                    if (sliderRef.current) {
+                        sliderRef.current.slickGoTo(stackIndex);
+                    }
+                }
+            }, 300); //,debouncing
+        }
+    }, [props.stacks, props.searchInput, techToStackIndexMapping]);
 
 
     useEffect(() => {
@@ -170,7 +175,8 @@ function SimpleSlider(props) {
         afterChange: currentIndex => {
             setSelectedStackIndex(currentIndex);
             checkScrollability();
-        }
+        },
+        initialSlide: selectedStackIndex
     };
 
 
