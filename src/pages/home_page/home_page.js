@@ -16,7 +16,7 @@ import Footer from "../../shared_components/footer/footer";
 import {fetchDataWithCache}  from "../../services/caching";
 import { AppContext } from '../../features/context';
 
-function HomePage(props ) {
+function HomePage() {
     const {
         searchInput,
         setResults,
@@ -103,7 +103,7 @@ function HomePage(props ) {
         const handleResize = () => {
             const containerWidth = document.querySelector('.card-container').offsetWidth;
             const baseCardWidth = 325;
-            const margin =9;
+            const margin =10;
             const n = Math.floor(containerWidth / (baseCardWidth + margin * 2));
             const remainingSpace = containerWidth - n * (baseCardWidth + margin * 2);
             if (remainingSpace < 200) {

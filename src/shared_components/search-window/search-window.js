@@ -37,11 +37,13 @@ const SearchWindow = () => {
         dispatch(fetchDataWithCache(searchTerm, cardsData, setCardsData));
     }, 100)).current;
 
-    const applySearch = useCallback((searchTerm) => {
+    const applySearch = useCallback((searchTerm, should) => {
         setSearchInput(searchTerm)
-        debouncedFetch(searchTerm);
-        appendSearches([searchTerm], lastSearches, setLastSearches);
         setSearchWindowVisible(false)
+        appendSearches([searchTerm], lastSearches, setLastSearches);
+        if(should) {
+            debouncedFetch(searchTerm);
+        }
     },[dispatch, cardsData, setCardsData, lastSearches, setLastSearches, setSearchInput, setSearchWindowVisible]);
 
 
@@ -84,7 +86,7 @@ const SearchWindow = () => {
                                 </div>
                                 {lastSearches.slice(-12).reverse().map((search, index) => (
                                     <div className="item" key={index}>
-                                        <button className="item-text-button" onClick={() => applySearch(search)}>
+                                        <button className="item-text-button" onClick={() => applySearch(search,true)}>
                                             <div className="wraper">
                                                 <img src={history} className="history-icon" alt="history-icon"/>
                                                 <div className="item-text">
@@ -109,7 +111,7 @@ const SearchWindow = () => {
                                 {currentSearches.length >0 ? (
                                     currentSearches.slice(0, 12).map((search, index) => (
                                     <div key={index} className="item">
-                                        <button className="item-text-button" onClick={() => applySearch(search)}>
+                                        <button className="item-text-button" onClick={() => applySearch(search,true)}>
                                             <div className="wrapper">
                                                 <div className="item-text">
                                                     {search}
@@ -120,17 +122,21 @@ const SearchWindow = () => {
                                     ))
                                 ): (
                                     <div className="item">
-                                        <div className="item-text">Search on "{searchInput}"</div>
+                                        <button className="item-text-button" onClick={() => applySearch(searchInput,false)}>
+                                            <div className="wrapper">
+                                                <div className="item-text">Search on "{searchInput}"</div>
+                                            </div>
+                                        </button>
                                     </div>
                                 )}
                             </div>
                         </div>
                     )
-                    :null
+                    : null
                 }
 
             </div>
         </div>
     );
 };
-export default React.memo( SearchWindow);
+export default React.memo(SearchWindow);

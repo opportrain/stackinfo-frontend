@@ -1,17 +1,16 @@
 import {useEffect, useState} from "react";
 
 const appendSearches = (newSearches, lastSearches, setLastSearches) => {
-    console.log("inside appendSearches")
+    const filteredNewSearches =  newSearches
+        .map(search => search.toLowerCase().trim())
+        .filter(search => search !== "");
 
-    const filteredNewSearches = newSearches.filter(search => search.trim() !== "");
     const updatedSearches = [...new Set([...lastSearches, ...filteredNewSearches])];
     setLastSearches(updatedSearches);
     localStorage.setItem('lastSearches', JSON.stringify(updatedSearches));
 };
 
 const removeSearch = (search, lastSearches, setLastSearches) => {
-    console.log("inside removeSearch")
-
     const updatedSearches = lastSearches.filter(item => item !== search);
     setLastSearches(updatedSearches);
     localStorage.setItem('lastSearches', JSON.stringify(updatedSearches));
@@ -19,7 +18,6 @@ const removeSearch = (search, lastSearches, setLastSearches) => {
 
 const clearLastSearches = (setLastSearches) => () => {
     setLastSearches([]);
-    console.log("inside clearLastSearches")
     localStorage.removeItem('lastSearches');
 };
 
