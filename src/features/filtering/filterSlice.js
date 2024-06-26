@@ -26,13 +26,16 @@ export const filterSlice = createSlice({
                     return filter !== action.payload.filterName;
                 })
             }
+            if (state.filters[key].length === 0) {
+                delete state.filters[key];
+            }
         },
         resetFilters: (state) => {
             state.filters = {};
         },
         resetSelectAll: (state, action) => {
             let key = action.payload.filterStack.toLowerCase();
-            state.filters[key] = [];
+            delete state.filters[key];
         },
     }
 })
