@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {useDispatch, useSelector} from "react-redux";
-import {addFilter, removeFilter, resetFilters} from "../../features/filtering/filterSlice";
+import {addFilter, removeFilter, resetSelectAll} from "../../features/filtering/filterSlice";
 
 function FilterDropDown({title, options}) {
     const [allOptions, setAllOptions] = useState([]);
@@ -51,8 +51,9 @@ function FilterDropDown({title, options}) {
     }
 
     function checkAllOptions() {
+        let filterStack = `stacks.${title}`
         if (isAllChecked || isIndeterminate) {
-            dispatch(resetFilters())
+            dispatch(resetSelectAll({filterStack}))
         } else {
             allOptions.forEach((option) => {
                 dispatch(addFilter(option))
