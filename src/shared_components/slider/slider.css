@@ -140,6 +140,7 @@ position: absolute;
     font-family: 'Arial', sans-serif;
     color: rgb(77,72,80);
     font-weight: bold;
+    font-size: 13px;
 }
 
 .simple-slider .slick-dots li button:before {
