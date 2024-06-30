@@ -13,8 +13,7 @@ import {removeFilter, resetFilters} from "../../features/filtering/filterSlice";
 import {searchAndFilter} from "../../services/filtering";
 import CircularProgress from '@mui/material/CircularProgress';
 import Footer from "../../shared_components/footer/footer";
-import {fetchDataWithCache}  from "../../services/caching";
-import { AppContext } from '../../features/context';
+import {AppContext} from '../../features/context';
 
 function HomePage() {
     const {
@@ -41,9 +40,9 @@ function HomePage() {
     }
     const getCardsElements = useCallback(() => {
         let res = [];
-            cardsData?.map(cardData => (res.push(<Card
+        cardsData?.map(cardData => (res.push(<Card
             key={cardData.company_name}
-            style={{ width: cardWidth }}
+            style={{width: cardWidth}}
             width={cardWidth}
             company_name={cardData.company_name}
             slogan={cardData.city}
@@ -51,7 +50,7 @@ function HomePage() {
             searchInput={searchInput}
         />)))
         return res;
-    }, [cardsData, searchInput,cardWidth]);
+    }, [cardsData, searchInput, cardWidth]);
     const renderCards = () => {
         if (!cardsData && !isLoading) {
             return <NotFound/>
@@ -77,7 +76,7 @@ function HomePage() {
                 </div>)))
         }
         setSelectedFiltersTags(tags)
-    },[selectedFilters, dispatch]);
+    }, [selectedFilters, dispatch]);
 
     let selectedFiltersContainer = <div className='selected-filters-container'>
         <div className="selected-filters">{selectedFiltersTags}</div>
@@ -89,7 +88,6 @@ function HomePage() {
 
     useEffect(() => {
         setIsLoading(true);
-        fetchDataWithCache(searchToken,cardsData,setCardsData)
         searchAndFilter(searchToken, selectedFilters).then(res => {
             setCardsData(res.results);
             setResults(res.results);
@@ -103,14 +101,14 @@ function HomePage() {
         const handleResize = () => {
             const containerWidth = document.querySelector('.card-container').offsetWidth;
             const baseCardWidth = 325;
-            const margin =10;
+            const margin = 10;
             const n = Math.floor(containerWidth / (baseCardWidth + margin * 2));
             const remainingSpace = containerWidth - n * (baseCardWidth + margin * 2);
             if (remainingSpace < 200) {
-                setCardWidth(`${(containerWidth / n) - (margin * 2)+2}px`);
+                setCardWidth(`${(containerWidth / n) - (margin * 2) + 2}px`);
             } else {
                 const newN = n + 1;
-                setCardWidth(`${(containerWidth / newN) - (margin * 2)+2}px`);
+                setCardWidth(`${(containerWidth / newN) - (margin * 2) + 2}px`);
             }
         };
         window.addEventListener('resize', handleResize);
@@ -120,7 +118,7 @@ function HomePage() {
         };
     }, []);
     return (
-        <div  className="page-wrapper">
+        <div className="page-wrapper">
             <div className="home_page">
                 <div className="header">
                     <img src={Heart} alt="Heart Icon"/>
@@ -142,7 +140,7 @@ function HomePage() {
                 <div className="page-body">
                     {selectedFiltersTags.length > 0 ? selectedFiltersContainer : <br/>}
                     <div className="main-container">
-                        <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div className="card-container" style={{display: 'flex', flexWrap: 'wrap'}}>
                             {renderCards()}
                         </div>
                         {isFiltersShowed ? <FiltersListContainer/> : null}
@@ -150,7 +148,7 @@ function HomePage() {
                 </div>
                 {isModalOpen && <FeedbackModal closeModal={closeModal}/>}
             </div>
-            <Footer />
+            <Footer/>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.dropdown-title{
+.dropdown-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -6,18 +6,21 @@
     padding: 0 10px 0 10px;
     border-radius: 8px;
     background-color: #E6EDF9;
-    font-size: 0.9em;
+    font-size: 14px;
 }
-.filter-option{
+
+.filter-option {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
 }
-.closed{
+
+.closed {
     display: none;
 }
-.options-list{
+
+.options-list {
     position: static;
     display: flex;
     flex-direction: column;
@@ -25,10 +28,12 @@
     font-size: 0.7em;
     height: fit-content;
     padding-left: 15px;
-    >*{
+
+    > * {
         position: static;
     }
 }
-.dropdown{
+
+.dropdown {
     margin-bottom: 5px;
 }
