@@ -26,10 +26,10 @@ const useSearchHistory = () => {
 
     useEffect(() => {
         const storedSearches = localStorage.getItem('lastSearches');
-        if (storedSearches) {
+/*        if (storedSearches) {
             const parsedSearches = JSON.parse(storedSearches).filter(search => search !== "");
             setLastSearches(parsedSearches);
-        }
+        }*/
     }, []);
 
     return { lastSearches, setLastSearches };

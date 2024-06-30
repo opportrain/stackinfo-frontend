@@ -1,17 +1,23 @@
+import {AddDataToCache, getCachedData} from "./caching";
+
 const baseURL = "https://search-stacks-nhtjl6xzla-zf.a.run.app"
 
-export async function getFiltersList(){
-    return await fetch(`${baseURL}/getFilters`).then((res)=>{
-        return res.json()
+export async function getFiltersList() {
+    const cacheKey = `cache_filters`;
+    const cachedResponse = await getCachedData(cacheKey);
+
+    if (cachedResponse) {
+        return cachedResponse;
+    }
+    return await fetch(`${baseURL}/getFilters`).then(async (res) => {
+        const responseData = await res.json();
+        await AddDataToCache(cacheKey, responseData);
+        return responseData;
     })
 }
-export async function searchByToken(token){
-    return await fetch(`${baseURL}/searchByToken/${token}`).then((res)=>{
-        return res.json()
-    })
-}
-export async function searchAndFilter(token, filters){
-    let data =   {
+
+export async function searchAndFilter(token, filters) {
+    let data = {
         "token": token,
         "filters": filters
     }
@@ -22,7 +28,15 @@ export async function searchAndFilter(token, filters){
         },
         body: JSON.stringify(data)
     };
-    return await fetch(`${baseURL}/searchAndFilter`, requestBody).then((res)=>{
-        return res.json()
+    const cacheKey = `cache_${JSON.stringify(data)}`;
+    const cachedResponse = await getCachedData(cacheKey);
+
+    if (cachedResponse) {
+        return cachedResponse;
+    }
+    return await fetch(`${baseURL}/searchAndFilter`, requestBody).then(async (res) => {
+        const responseData = await res.json();
+        await AddDataToCache(cacheKey, responseData);
+        return responseData;
     })
 }

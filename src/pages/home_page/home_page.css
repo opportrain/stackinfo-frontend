@@ -1,7 +1,7 @@
 .header{
     display: flex;
     color: #2D2D2D;
-    font-size: 1.2em;
+    font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -30,7 +30,7 @@
 }
 .feedback-message{
     color: #2D2D2D;
-    font-size: 0.8em;
+    font-size: 15px;
     font-weight: 500;
     height: fit-content;
 }
@@ -45,7 +45,7 @@
     margin: 5px;
     color: white;
     & span {
-        font-size: 0.9em;
+        font-size: 15px;
         margin-left: 15px;
     }
 }
