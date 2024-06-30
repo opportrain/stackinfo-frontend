@@ -52,7 +52,7 @@ hr {
 .company-name {
     color: #2D2D2D;
     font-family: Poppins, sans-serif;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.25em;
     text-align: left;
@@ -60,7 +60,7 @@ hr {
 
 .company-slogan {
     color: #6D6D6D;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     width: 40%;
     margin-top: 0.25em;

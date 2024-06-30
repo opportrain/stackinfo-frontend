@@ -1,7 +1,7 @@
 .header{
     display: flex;
     color: #2D2D2D;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -10,7 +10,7 @@
     padding-left: 15px;
     min-width: 388px;
     .sub-header{
-        font-size: 0.9em;
+        font-size: 15px;
     }
 }
 .header img{
@@ -30,7 +30,7 @@
 }
 .feedback-message{
     color: #2D2D2D;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
     height: fit-content;
 }
